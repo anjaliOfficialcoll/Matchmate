@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ApanaGhr - Coming Soon</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.344.0/lucide.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i data-lucide="home"></i>
+                    </div>
+                    <span class="logo-text">ApanaGhr</span>
+                </div>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i data-lucide="sun" class="sun-icon"></i>
+                    <i data-lucide="moon" class="moon-icon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        Coming Soon: Smarter Room & 
+                        <span class="highlight">Roommate Matching</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Find PGs, Flats, and Compatible Roommates – Powered by AI.
+                    </p>
+                    
+                    <!-- AI Illustration -->
+                    <div class="hero-visual">
+                        <div class="ai-illustration">
+                            <div class="ai-brain">
+                                <div class="brain-node node-1"></div>
+                                <div class="brain-node node-2"></div>
+                                <div class="brain-node node-3"></div>
+                                <div class="brain-node node-4"></div>
+                                <div class="brain-node node-5"></div>
+                                <div class="connection connection-1"></div>
+                                <div class="connection connection-2"></div>
+                                <div class="connection connection-3"></div>
+                                <div class="connection connection-4"></div>
+                            </div>
+                            <div class="floating-icons">
+                                <div class="icon-item icon-1">
+                                    <i data-lucide="home"></i>
+                                </div>
+                                <div class="icon-item icon-2">
+                                    <i data-lucide="users"></i>
+                                </div>
+                                <div class="icon-item icon-3">
+                                    <i data-lucide="map-pin"></i>
+                                </div>
+                                <div class="icon-item icon-4">
+                                    <i data-lucide="heart"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Email Form -->
+                <div class="email-form-container">
+                    <form class="email-form" id="emailForm">
+                        <div class="form-group">
+                            <input 
+                                type="email" 
+                                id="email" 
+                                placeholder="Enter your email" 
+                                required
+                                class="email-input"
+                            >
+                            <button type="submit" class="notify-btn">
+                                <span class="btn-text">Notify Me</span>
+                                <i data-lucide="arrow-right" class="btn-icon"></i>
+                            </button>
+                        </div>
+                        <div class="success-message" id="successMessage">
+                            <i data-lucide="check-circle"></i>
+                            <span>Thanks! We'll keep you updated.</span>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Features Preview -->
+                <div class="features-preview">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i data-lucide="brain"></i>
+                        </div>
+                        <span>AI-Powered Matching</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i data-lucide="shield-check"></i>
+                        </div>
+                        <span>Verified Listings</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i data-lucide="zap"></i>
+                        </div>
+                        <span>Instant Matches</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Background Elements -->
+        <div class="bg-elements">
+            <div class="bg-circle circle-1"></div>
+            <div class="bg-circle circle-2"></div>
+            <div class="bg-circle circle-3"></div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
