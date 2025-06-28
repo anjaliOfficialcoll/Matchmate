@@ -20,6 +20,47 @@ themeToggle.addEventListener('click', () => {
     }, 150);
 });
 
+// Countdown Timer Functionality
+function updateCountdown() {
+    // Set target date (30 days from now for demo)
+    const targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() + 30);
+    targetDate.setHours(10, 55, 30, 0); // Set to 10:55:30
+    
+    const now = new Date().getTime();
+    const distance = targetDate.getTime() - now;
+    
+    // Calculate time units
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+    // Update the display
+    document.getElementById('days').textContent = days.toString().padStart(2, '0');
+    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    
+    // Add animation effect when numbers change
+    const countdownNumbers = document.querySelectorAll('.countdown-number');
+    countdownNumbers.forEach(number => {
+        number.style.transform = 'scale(1.05)';
+        setTimeout(() => {
+            number.style.transform = 'scale(1)';
+        }, 100);
+    });
+    
+    // If countdown is finished
+    if (distance < 0) {
+        document.getElementById('countdownTimer').innerHTML = '<div class="countdown-finished">🎉 We\'re Live!</div>';
+    }
+}
+
+// Update countdown every second
+setInterval(updateCountdown, 1000);
+updateCountdown(); // Initial call
+
 // Email Form Functionality
 const emailForm = document.getElementById('emailForm');
 const emailInput = document.getElementById('email');
@@ -155,11 +196,11 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe elements for scroll animations
-document.querySelectorAll('.feature-item').forEach(item => {
-    item.style.opacity = '0';
-    item.style.transform = 'translateY(20px)';
-    item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(item);
+document.querySelectorAll('.feature-card').forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(card);
 });
 
 // Add parallax effect to background circles

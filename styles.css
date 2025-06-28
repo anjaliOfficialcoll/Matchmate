@@ -317,6 +317,59 @@ body {
 .icon-3 { bottom: 20%; left: -10px; animation-delay: 2s; }
 .icon-4 { bottom: -10px; right: 20%; animation-delay: 3s; }
 
+/* Countdown Timer */
+.countdown-section {
+  margin: 3rem 0;
+}
+
+.countdown-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--heading-color);
+  margin-bottom: 1.5rem;
+}
+
+.countdown-timer {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--element-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 1.5rem 1rem;
+  min-width: 100px;
+  box-shadow: 0 4px 12px var(--shadow-light);
+  transition: all var(--transition-medium);
+}
+
+.countdown-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--shadow-medium);
+}
+
+.countdown-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-accent);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.countdown-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--body-text);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 /* Email Form */
 .email-form-container {
   margin-bottom: 3rem;
@@ -420,51 +473,98 @@ body {
   height: 1.25rem;
 }
 
-/* Features Preview */
-.features-preview {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-.feature-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 1.5rem;
+/* Features Section */
+.features-section {
+  padding: var(--section-padding);
   background: var(--element-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 0.75rem;
-  transition: all var(--transition-medium);
-  box-shadow: 0 2px 8px var(--shadow-light);
+  border-top: 1px solid var(--border-color);
 }
 
-.feature-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px var(--shadow-medium);
+.features-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--heading-color);
+  margin-bottom: 3rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  text-align: center;
+  padding: 2.5rem 2rem;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 1.5rem;
+  transition: all var(--transition-medium);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-primary);
+  transform: scaleX(0);
+  transition: transform var(--transition-medium);
+}
+
+.feature-card:hover::before {
+  transform: scaleX(1);
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px var(--shadow-medium);
+}
+
+.feature-icon-wrapper {
+  margin-bottom: 1.5rem;
 }
 
 .feature-icon {
-  width: 2rem;
-  height: 2rem;
-  background: var(--gradient-highlight);
-  border-radius: 0.5rem;
+  width: 80px;
+  height: 80px;
+  background: var(--gradient-primary);
+  border-radius: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0 auto;
   color: white;
+  transition: all var(--transition-medium);
+}
+
+.feature-card:hover .feature-icon {
+  transform: scale(1.1) rotate(5deg);
 }
 
 .feature-icon i {
-  width: 1rem;
-  height: 1rem;
+  width: 2rem;
+  height: 2rem;
 }
 
-.feature-item span {
-  font-weight: 500;
+.feature-title {
+  font-size: 1.5rem;
+  font-weight: 600;
   color: var(--heading-color);
-  white-space: nowrap;
+  margin-bottom: 1rem;
+}
+
+.feature-description {
+  font-size: 1rem;
+  color: var(--body-text);
+  line-height: 1.6;
 }
 
 /* Background Elements */
@@ -583,12 +683,30 @@ body {
     min-width: auto;
   }
   
-  .features-preview {
+  .countdown-timer {
     gap: 1rem;
   }
   
-  .feature-item {
-    padding: 0.75rem 1rem;
+  .countdown-item {
+    min-width: 80px;
+    padding: 1rem 0.75rem;
+  }
+  
+  .countdown-number {
+    font-size: 2rem;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .feature-card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .features-title {
+    font-size: 2rem;
   }
   
   .ai-illustration {
@@ -612,13 +730,20 @@ body {
     font-size: 2rem;
   }
   
-  .features-preview {
-    flex-direction: column;
-    align-items: center;
+  .countdown-timer {
+    gap: 0.75rem;
   }
   
-  .feature-item span {
-    white-space: normal;
-    text-align: center;
+  .countdown-item {
+    min-width: 70px;
+    padding: 0.75rem 0.5rem;
+  }
+  
+  .countdown-number {
+    font-size: 1.75rem;
+  }
+  
+  .countdown-label {
+    font-size: 0.75rem;
   }
 }
