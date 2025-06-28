@@ -3,13 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ApanaGhr - Your Perfect Room & Roommate Story</title>
-    <meta name="description" content="Follow the journey from housing struggles to finding your perfect match with ApanaGhr's AI-powered platform.">
+    <title>ApanaGhr - AI-Powered PG & Roommate Matching Platform | Coming Soon</title>
+    <meta name="description" content="The smartest way to find your perfect PG, flat, and roommate. AI-powered matching for students. Join the waitlist for early access.">
+    <meta name="keywords" content="PG finder, roommate matching, student housing, AI matching, flat rental, accommodation">
+    <link rel="canonical" href="https://apanaghr.com">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apanaghr.com">
+    <meta property="og:title" content="ApanaGhr - AI-Powered PG & Roommate Matching">
+    <meta property="og:description" content="The smartest way to find your perfect PG, flat, and roommate. AI-powered matching for students.">
+    <meta property="og:image" content="https://apanaghr.com/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://apanaghr.com">
+    <meta property="twitter:title" content="ApanaGhr - AI-Powered PG & Roommate Matching">
+    <meta property="twitter:description" content="The smartest way to find your perfect PG, flat, and roommate. AI-powered matching for students.">
+    <meta property="twitter:image" content="https://apanaghr.com/og-image.jpg">
+
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Comic+Neue:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.344.0/lucide.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
 </head>
 <body>
     <!-- Header -->
@@ -22,6 +40,12 @@
                     </div>
                     <span class="logo-text">ApanaGhr</span>
                 </div>
+                <nav class="nav-menu">
+                    <a href="#hero" class="nav-link">Home</a>
+                    <a href="#features" class="nav-link">Features</a>
+                    <a href="#how-it-works" class="nav-link">How It Works</a>
+                    <a href="#waitlist" class="nav-link">Join Waitlist</a>
+                </nav>
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                     <i data-lucide="sun" class="sun-icon"></i>
                     <i data-lucide="moon" class="moon-icon"></i>
@@ -30,418 +54,410 @@
         </div>
     </header>
 
-    <!-- Comic Story Container -->
-    <main class="story-container">
-        <!-- Scene 1: The Problem -->
-        <section class="story-scene scene-1" id="scene1">
-            <div class="scene-background bg-frustrated"></div>
-            <div class="container">
-                <div class="scene-content">
-                    <div class="scene-text" data-aos="fade-up">
-                        <h1 class="scene-title">Tired of mismatched roommates?</h1>
-                        <p class="scene-subtitle">One wants to party all night, the other needs complete silence to study...</p>
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+        <div class="hero-background">
+            <div class="hero-pattern"></div>
+            <div class="floating-elements">
+                <div class="floating-icon" style="top: 20%; left: 10%;">🏠</div>
+                <div class="floating-icon" style="top: 30%; right: 15%;">🤝</div>
+                <div class="floating-icon" style="bottom: 40%; left: 20%;">🎯</div>
+                <div class="floating-icon" style="bottom: 20%; right: 10%;">✨</div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text" data-aos="fade-up">
+                    <div class="coming-soon-badge">
+                        <span class="badge-text">Coming Soon</span>
+                        <div class="badge-pulse"></div>
                     </div>
-                    <div class="scene-illustration" data-aos="fade-left" data-aos-delay="300">
-                        <div class="comic-panel">
-                            <div class="character character-angry">
-                                <div class="character-body">
-                                    <div class="character-head angry-face">
-                                        <div class="eyes angry-eyes">
-                                            <div class="eye left-eye"></div>
-                                            <div class="eye right-eye"></div>
-                                        </div>
-                                        <div class="mouth angry-mouth"></div>
-                                    </div>
-                                    <div class="character-torso angry-shirt"></div>
-                                </div>
-                                <div class="speech-bubble angry-bubble">
-                                    <span>Turn down the music!</span>
-                                </div>
+                    <h1 class="hero-title">
+                        Find Your Perfect
+                        <span class="gradient-text">Room & Roommate</span>
+                        with AI
+                    </h1>
+                    <p class="hero-subtitle">
+                        The smartest way to discover verified PGs, flats, and compatible roommates. 
+                        Our AI matches you based on lifestyle, preferences, and location for the perfect living experience.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-icon">🏠</div>
+                            <div class="stat-text">
+                                <span class="stat-number">1000+</span>
+                                <span class="stat-label">Verified Properties</span>
                             </div>
-                            <div class="character character-party">
-                                <div class="character-body">
-                                    <div class="character-head party-face">
-                                        <div class="eyes party-eyes">
-                                            <div class="eye left-eye"></div>
-                                            <div class="eye right-eye"></div>
-                                        </div>
-                                        <div class="mouth party-mouth"></div>
-                                    </div>
-                                    <div class="character-torso party-shirt"></div>
-                                </div>
-                                <div class="speech-bubble party-bubble">
-                                    <span>🎵 Party time! 🎵</span>
-                                </div>
-                                <div class="music-notes">
-                                    <span class="note">♪</span>
-                                    <span class="note">♫</span>
-                                    <span class="note">♪</span>
-                                </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">🤝</div>
+                            <div class="stat-text">
+                                <span class="stat-number">95%</span>
+                                <span class="stat-label">Match Success</span>
                             </div>
-                            <div class="conflict-effects">
-                                <div class="anger-lines"></div>
-                                <div class="stress-symbols">
-                                    <span>😤</span>
-                                    <span>💢</span>
-                                    <span>😫</span>
-                                </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">🛡️</div>
+                            <div class="stat-text">
+                                <span class="stat-number">100%</span>
+                                <span class="stat-label">Safe & Verified</span>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="scroll-indicator">
-                <div class="scroll-arrow">
-                    <i data-lucide="chevron-down"></i>
-                </div>
-                <span>Scroll to continue the story</span>
-            </div>
-        </section>
-
-        <!-- Scene 2: Failed Solutions -->
-        <section class="story-scene scene-2" id="scene2">
-            <div class="scene-background bg-unsafe"></div>
-            <div class="container">
-                <div class="scene-content">
-                    <div class="scene-text" data-aos="fade-up">
-                        <h2 class="scene-title">Scared of unsafe PGs in a new city?</h2>
-                        <p class="scene-subtitle">Random Facebook groups and shady brokers don't help...</p>
-                    </div>
-                    <div class="scene-illustration" data-aos="fade-right" data-aos-delay="300">
-                        <div class="comic-panel">
-                            <div class="character character-scared">
-                                <div class="character-body">
-                                    <div class="character-head scared-face">
-                                        <div class="eyes scared-eyes">
-                                            <div class="eye left-eye"></div>
-                                            <div class="eye right-eye"></div>
-                                        </div>
-                                        <div class="mouth scared-mouth"></div>
-                                    </div>
-                                    <div class="character-torso scared-shirt"></div>
-                                </div>
-                                <div class="suitcase">
-                                    <div class="suitcase-body"></div>
-                                    <div class="suitcase-handle"></div>
-                                </div>
-                                <div class="thought-bubble">
-                                    <span>Is this place safe?</span>
-                                </div>
-                            </div>
-                            <div class="unsafe-environment">
-                                <div class="shady-building">
-                                    <div class="building-wall"></div>
-                                    <div class="broken-window"></div>
-                                    <div class="dark-alley"></div>
-                                </div>
-                                <div class="warning-signs">
-                                    <div class="warning-icon">⚠️</div>
-                                    <div class="warning-icon">🚫</div>
-                                </div>
-                            </div>
-                            <div class="failed-attempts">
-                                <div class="facebook-fail">
-                                    <div class="fb-icon">📘</div>
-                                    <span class="fail-text">No response...</span>
-                                </div>
-                                <div class="broker-fail">
-                                    <div class="broker-icon">🕴️</div>
-                                    <span class="fail-text">Seems sketchy...</span>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="hero-cta">
+                        <button class="primary-btn" onclick="document.getElementById('waitlist').scrollIntoView({behavior: 'smooth'})">
+                            <span>Join Waitlist</span>
+                            <i data-lucide="arrow-right"></i>
+                        </button>
+                        <button class="secondary-btn" onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">
+                            <i data-lucide="play"></i>
+                            <span>See How It Works</span>
+                        </button>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Scene 3: The Wish -->
-        <section class="story-scene scene-3" id="scene3">
-            <div class="scene-background bg-wishful"></div>
-            <div class="container">
-                <div class="scene-content">
-                    <div class="scene-text" data-aos="fade-up">
-                        <h2 class="scene-title">Just want peace, cleanliness, and safety?</h2>
-                        <p class="scene-subtitle">Your perfect living situation checklist...</p>
-                    </div>
-                    <div class="scene-illustration" data-aos="zoom-in" data-aos-delay="300">
-                        <div class="comic-panel">
-                            <div class="character character-hopeful">
-                                <div class="character-body">
-                                    <div class="character-head hopeful-face">
-                                        <div class="eyes hopeful-eyes">
-                                            <div class="eye left-eye"></div>
-                                            <div class="eye right-eye"></div>
-                                        </div>
-                                        <div class="mouth hopeful-mouth"></div>
-                                    </div>
-                                    <div class="character-torso hopeful-shirt"></div>
-                                </div>
-                            </div>
-                            <div class="wishlist">
-                                <div class="wishlist-header">
-                                    <h3>My Perfect Room</h3>
-                                </div>
-                                <div class="wishlist-items">
-                                    <div class="wishlist-item" data-aos="fade-in" data-aos-delay="500">
-                                        <div class="checkbox checked">✓</div>
-                                        <span>Clean & Hygienic</span>
-                                    </div>
-                                    <div class="wishlist-item" data-aos="fade-in" data-aos-delay="600">
-                                        <div class="checkbox checked">✓</div>
-                                        <span>Safe Neighborhood</span>
-                                    </div>
-                                    <div class="wishlist-item" data-aos="fade-in" data-aos-delay="700">
-                                        <div class="checkbox checked">✓</div>
-                                        <span>Compatible Roommates</span>
-                                    </div>
-                                    <div class="wishlist-item" data-aos="fade-in" data-aos-delay="800">
-                                        <div class="checkbox checked">✓</div>
-                                        <span>Affordable Price</span>
-                                    </div>
-                                    <div class="wishlist-item" data-aos="fade-in" data-aos-delay="900">
-                                        <div class="checkbox checked">✓</div>
-                                        <span>Near College/Work</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="dream-elements">
-                                <div class="star">⭐</div>
-                                <div class="star">✨</div>
-                                <div class="star">🌟</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Scene 4: The Solution -->
-        <section class="story-scene scene-4" id="scene4">
-            <div class="scene-background bg-solution"></div>
-            <div class="container">
-                <div class="scene-content">
-                    <div class="scene-text" data-aos="fade-up">
-                        <h2 class="scene-title">Say hello to ApanaGhr!</h2>
-                        <p class="scene-subtitle">AI-powered matching for your perfect room & roommate</p>
-                    </div>
-                    <div class="scene-illustration" data-aos="fade-up" data-aos-delay="300">
-                        <div class="comic-panel">
-                            <div class="character character-happy">
-                                <div class="character-body">
-                                    <div class="character-head happy-face">
-                                        <div class="eyes happy-eyes">
-                                            <div class="eye left-eye"></div>
-                                            <div class="eye right-eye"></div>
-                                        </div>
-                                        <div class="mouth happy-mouth"></div>
-                                    </div>
-                                    <div class="character-torso happy-shirt"></div>
-                                </div>
-                                <div class="celebration-effects">
-                                    <div class="confetti">🎉</div>
-                                    <div class="confetti">🎊</div>
-                                    <div class="confetti">✨</div>
-                                </div>
-                            </div>
-                            <div class="app-mockup">
-                                <div class="phone-frame">
-                                    <div class="phone-screen">
+                <div class="hero-visual" data-aos="fade-left" data-aos-delay="300">
+                    <div class="mockup-container">
+                        <div class="phone-mockup">
+                            <div class="phone-frame">
+                                <div class="phone-screen">
+                                    <div class="app-interface">
                                         <div class="app-header">
                                             <div class="app-logo">
                                                 <i data-lucide="home"></i>
                                             </div>
                                             <span>ApanaGhr</span>
                                         </div>
-                                        <div class="match-notification">
-                                            <div class="notification-icon">🎯</div>
-                                            <div class="notification-content">
+                                        <div class="match-card">
+                                            <div class="match-avatar">
+                                                <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop" alt="Roommate" class="avatar-img">
+                                                <div class="online-indicator"></div>
+                                            </div>
+                                            <div class="match-info">
                                                 <h4>Perfect Match Found!</h4>
-                                                <p>95% compatibility with Sarah</p>
-                                                <div class="match-details">
-                                                    <span class="detail">🏠 Clean PG</span>
-                                                    <span class="detail">📍 2km from college</span>
-                                                    <span class="detail">💰 ₹8,000/month</span>
+                                                <p>Sarah • 95% Compatible</p>
+                                                <div class="match-tags">
+                                                    <span class="tag">Clean</span>
+                                                    <span class="tag">Studious</span>
+                                                    <span class="tag">Non-smoker</span>
                                                 </div>
                                             </div>
+                                            <div class="match-actions">
+                                                <button class="action-btn primary">Connect</button>
+                                                <button class="action-btn secondary">View Profile</button>
+                                            </div>
                                         </div>
-                                        <div class="action-buttons">
-                                            <button class="btn-primary">View Details</button>
-                                            <button class="btn-secondary">Chat Now</button>
+                                        <div class="property-preview">
+                                            <img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&fit=crop" alt="Property" class="property-img">
+                                            <div class="property-info">
+                                                <h5>Cozy PG Near College</h5>
+                                                <p>📍 2km from campus • ₹8,000/month</p>
+                                                <div class="property-features">
+                                                    <span>🛡️ Verified</span>
+                                                    <span>⭐ 4.8 Rating</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="success-indicators">
-                                <div class="indicator">
-                                    <div class="indicator-icon">🛡️</div>
-                                    <span>100% Verified</span>
-                                </div>
-                                <div class="indicator">
-                                    <div class="indicator-icon">🧠</div>
-                                    <span>AI Powered</span>
-                                </div>
-                                <div class="indicator">
-                                    <div class="indicator-icon">⚡</div>
-                                    <span>Instant Match</span>
-                                </div>
+                        </div>
+                        <div class="floating-notifications">
+                            <div class="notification" data-aos="fade-in" data-aos-delay="1000">
+                                <i data-lucide="check-circle"></i>
+                                <span>Profile Verified ✓</span>
+                            </div>
+                            <div class="notification" data-aos="fade-in" data-aos-delay="1500">
+                                <i data-lucide="heart"></i>
+                                <span>New Match Found!</span>
+                            </div>
+                            <div class="notification" data-aos="fade-in" data-aos-delay="2000">
+                                <i data-lucide="map-pin"></i>
+                                <span>Property Nearby</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Features Section -->
-        <section class="features-section" id="features">
-            <div class="container">
-                <div class="features-content">
-                    <div class="features-header" data-aos="fade-up">
-                        <h2 class="features-title">How ApanaGhr Works</h2>
-                        <p class="features-subtitle">Smart technology meets human needs for the perfect housing solution</p>
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Why Choose ApanaGhr?</h2>
+                <p class="section-subtitle">Experience the future of student housing with our AI-powered platform</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon">
+                        <i data-lucide="brain"></i>
                     </div>
+                    <h3 class="feature-title">AI-Powered Matching</h3>
+                    <p class="feature-description">Our advanced algorithm analyzes your lifestyle, preferences, and habits to find the most compatible roommates and properties.</p>
+                    <div class="feature-highlight">
+                        <span class="highlight-badge">Smart Algorithm</span>
+                    </div>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <h3 class="feature-title">100% Verified Profiles</h3>
+                    <p class="feature-description">Every user and property is thoroughly verified with student ID, background checks, and landlord verification for your safety.</p>
+                    <div class="feature-highlight">
+                        <span class="highlight-badge">Zero Fake Profiles</span>
+                    </div>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon">
+                        <i data-lucide="map-pin"></i>
+                    </div>
+                    <h3 class="feature-title">Smart Location Filters</h3>
+                    <p class="feature-description">Find properties based on distance from your college, metro stations, and important amenities with real-time commute calculations.</p>
+                    <div class="feature-highlight">
+                        <span class="highlight-badge">Location Intelligence</span>
+                    </div>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon">
+                        <i data-lucide="message-circle"></i>
+                    </div>
+                    <h3 class="feature-title">Safe Communication</h3>
+                    <p class="feature-description">Connect with potential roommates through our secure in-app chat with privacy controls and safety reporting features.</p>
+                    <div class="feature-highlight">
+                        <span class="highlight-badge">Privacy First</span>
+                    </div>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-icon">
+                        <i data-lucide="star"></i>
+                    </div>
+                    <h3 class="feature-title">Review System</h3>
+                    <p class="feature-description">Read honest reviews from previous tenants about properties and roommates to make informed decisions.</p>
+                    <div class="feature-highlight">
+                        <span class="highlight-badge">Transparent Reviews</span>
+                    </div>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-icon">
+                        <i data-lucide="smartphone"></i>
+                    </div>
+                    <h3 class="feature-title">Mobile-First Experience</h3>
+                    <p class="feature-description">Access everything on-the-go with our responsive web app and upcoming native mobile applications.</p>
+                    <div class="feature-highlight">
+                        <span class="highlight-badge">Cross Platform</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works-section" id="how-it-works">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">How ApanaGhr Works</h2>
+                <p class="section-subtitle">Simple steps to find your perfect living situation</p>
+            </div>
+            
+            <div class="steps-container">
+                <div class="step-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <i data-lucide="user-plus"></i>
+                        </div>
+                        <h3 class="step-title">Create Your Profile</h3>
+                        <p class="step-description">Tell us about your lifestyle, preferences, budget, and what you're looking for in a roommate and property.</p>
+                    </div>
+                </div>
+
+                <div class="step-connector" data-aos="fade-in" data-aos-delay="200"></div>
+
+                <div class="step-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <i data-lucide="search"></i>
+                        </div>
+                        <h3 class="step-title">AI Finds Matches</h3>
+                        <p class="step-description">Our intelligent algorithm analyzes thousands of profiles and properties to find your perfect matches.</p>
+                    </div>
+                </div>
+
+                <div class="step-connector" data-aos="fade-in" data-aos-delay="400"></div>
+
+                <div class="step-item" data-aos="fade-up" data-aos-delay="500">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <i data-lucide="message-square"></i>
+                        </div>
+                        <h3 class="step-title">Connect Safely</h3>
+                        <p class="step-description">Chat with potential roommates and property owners through our secure platform before making decisions.</p>
+                    </div>
+                </div>
+
+                <div class="step-connector" data-aos="fade-in" data-aos-delay="600"></div>
+
+                <div class="step-item" data-aos="fade-up" data-aos-delay="700">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <i data-lucide="home"></i>
+                        </div>
+                        <h3 class="step-title">Move In Happy</h3>
+                        <p class="step-description">Complete the process with verified documentation and move into your perfect new home with confidence.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">What Students Are Saying</h2>
+                <p class="section-subtitle">Real experiences from our beta testing community</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">
+                            <i data-lucide="quote"></i>
+                        </div>
+                        <p class="testimonial-text">"Finally, a platform that understands what students actually need. The AI matching is incredibly accurate!"</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=60&h=60&fit=crop" alt="Priya" class="author-avatar">
+                            <div class="author-info">
+                                <h4 class="author-name">Priya Sharma</h4>
+                                <p class="author-role">Engineering Student, Delhi</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">
+                            <i data-lucide="quote"></i>
+                        </div>
+                        <p class="testimonial-text">"The verification process gave me confidence. No more worrying about fake profiles or unsafe places."</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=60&h=60&fit=crop" alt="Rahul" class="author-avatar">
+                            <div class="author-info">
+                                <h4 class="author-name">Rahul Gupta</h4>
+                                <p class="author-role">MBA Student, Mumbai</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">
+                            <i data-lucide="quote"></i>
+                        </div>
+                        <p class="testimonial-text">"Found my perfect roommate in just 2 days! The compatibility matching is spot on."</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=60&h=60&fit=crop" alt="Ananya" class="author-avatar">
+                            <div class="author-info">
+                                <h4 class="author-name">Ananya Patel</h4>
+                                <p class="author-role">Medical Student, Bangalore</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Waitlist Section -->
+    <section class="waitlist-section" id="waitlist">
+        <div class="waitlist-background">
+            <div class="waitlist-pattern"></div>
+        </div>
+        <div class="container">
+            <div class="waitlist-content" data-aos="fade-up">
+                <div class="waitlist-text">
+                    <h2 class="waitlist-title">Be the First to Experience ApanaGhr</h2>
+                    <p class="waitlist-subtitle">Join our exclusive waitlist and get early access when we launch. Plus, enjoy special benefits as a founding member.</p>
                     
-                    <div class="features-grid">
-                        <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
-                            <div class="feature-icon">
-                                <i data-lucide="brain"></i>
-                            </div>
-                            <h3 class="feature-title">AI-Powered Matching</h3>
-                            <p class="feature-description">Our advanced algorithm analyzes your lifestyle, preferences, and habits to find the most compatible roommates and properties.</p>
-                            <div class="feature-highlight">
-                                <span class="highlight-badge">95% Match Success</span>
-                            </div>
+                    <div class="benefits-list">
+                        <div class="benefit-item">
+                            <i data-lucide="zap"></i>
+                            <span>Early access to the platform</span>
                         </div>
-
-                        <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-                            <div class="feature-icon">
-                                <i data-lucide="shield-check"></i>
-                            </div>
-                            <h3 class="feature-title">100% Verified Profiles</h3>
-                            <p class="feature-description">Every user and property is thoroughly verified with student ID, background checks, and landlord verification for your safety.</p>
-                            <div class="feature-highlight">
-                                <span class="highlight-badge">Zero Fake Profiles</span>
-                            </div>
+                        <div class="benefit-item">
+                            <i data-lucide="gift"></i>
+                            <span>Free premium features for 3 months</span>
                         </div>
-
-                        <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
-                            <div class="feature-icon">
-                                <i data-lucide="map-pin"></i>
-                            </div>
-                            <h3 class="feature-title">Smart Location Filters</h3>
-                            <p class="feature-description">Find properties based on distance from your college, metro stations, and important amenities with real-time commute calculations.</p>
-                            <div class="feature-highlight">
-                                <span class="highlight-badge">1000+ Properties</span>
-                            </div>
+                        <div class="benefit-item">
+                            <i data-lucide="users"></i>
+                            <span>Priority customer support</span>
                         </div>
-
-                        <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
-                            <div class="feature-icon">
-                                <i data-lucide="message-circle"></i>
-                            </div>
-                            <h3 class="feature-title">Safe Communication</h3>
-                            <p class="feature-description">Connect with potential roommates through our secure in-app chat with privacy controls and safety reporting features.</p>
-                            <div class="feature-highlight">
-                                <span class="highlight-badge">Privacy First</span>
-                            </div>
-                        </div>
-
-                        <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
-                            <div class="feature-icon">
-                                <i data-lucide="star"></i>
-                            </div>
-                            <h3 class="feature-title">Review System</h3>
-                            <p class="feature-description">Read honest reviews from previous tenants about properties and roommates to make informed decisions.</p>
-                            <div class="feature-highlight">
-                                <span class="highlight-badge">Transparent Reviews</span>
-                            </div>
-                        </div>
-
-                        <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
-                            <div class="feature-icon">
-                                <i data-lucide="smartphone"></i>
-                            </div>
-                            <h3 class="feature-title">Mobile-First Experience</h3>
-                            <p class="feature-description">Access everything on-the-go with our responsive web app and upcoming native mobile applications.</p>
-                            <div class="feature-highlight">
-                                <span class="highlight-badge">Coming Soon</span>
-                            </div>
+                        <div class="benefit-item">
+                            <i data-lucide="star"></i>
+                            <span>Founding member badge</span>
                         </div>
                     </div>
-
-                    <div class="features-cta" data-aos="fade-up" data-aos-delay="700">
-                        <div class="cta-content">
-                            <h3>Ready to experience the future of housing?</h3>
-                            <p>Join thousands of students who've already found their perfect match</p>
-                            <button class="cta-button" onclick="document.getElementById('cta').scrollIntoView({behavior: 'smooth'})">
-                                <span>Join Waitlist Now</span>
-                                <i data-lucide="arrow-right"></i>
+                </div>
+                
+                <div class="email-form-container" data-aos="fade-up" data-aos-delay="200">
+                    <form class="email-form" id="emailForm">
+                        <div class="form-group">
+                            <div class="input-wrapper">
+                                <i data-lucide="mail" class="input-icon"></i>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    placeholder="Enter your email address" 
+                                    required
+                                    class="email-input"
+                                >
+                            </div>
+                            <button type="submit" class="notify-btn">
+                                <span class="btn-text">Join Waitlist</span>
+                                <i data-lucide="arrow-right" class="btn-icon"></i>
                             </button>
                         </div>
+                        <div class="form-note">
+                            <i data-lucide="shield-check"></i>
+                            <span>We respect your privacy. No spam, ever.</span>
+                        </div>
+                        <div class="success-message" id="successMessage">
+                            <i data-lucide="check-circle"></i>
+                            <span>Welcome to the ApanaGhr family! We'll be in touch soon.</span>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="social-proof" data-aos="fade-up" data-aos-delay="400">
+                    <div class="proof-item">
+                        <div class="proof-number">2,500+</div>
+                        <div class="proof-label">Students Waiting</div>
+                    </div>
+                    <div class="proof-item">
+                        <div class="proof-number">50+</div>
+                        <div class="proof-label">Cities Ready</div>
+                    </div>
+                    <div class="proof-item">
+                        <div class="proof-number">1000+</div>
+                        <div class="proof-label">Properties Listed</div>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Final CTA Section -->
-        <section class="cta-section" id="cta">
-            <div class="cta-background">
-                <div class="cta-pattern"></div>
-            </div>
-            <div class="container">
-                <div class="cta-content" data-aos="fade-up">
-                    <div class="cta-text">
-                        <h2 class="cta-title">Ready for your perfect match?</h2>
-                        <p class="cta-subtitle">Join the waitlist and be the first to find your ideal room & roommate</p>
-                    </div>
-                    
-                    <div class="email-form-container" data-aos="fade-up" data-aos-delay="200">
-                        <form class="email-form" id="emailForm">
-                            <div class="form-group">
-                                <div class="input-wrapper">
-                                    <i data-lucide="mail" class="input-icon"></i>
-                                    <input 
-                                        type="email" 
-                                        id="email" 
-                                        placeholder="Enter your email address" 
-                                        required
-                                        class="email-input"
-                                    >
-                                </div>
-                                <button type="submit" class="notify-btn">
-                                    <span class="btn-text">Join Waitlist</span>
-                                    <i data-lucide="arrow-right" class="btn-icon"></i>
-                                </button>
-                            </div>
-                            <div class="form-note">
-                                <i data-lucide="shield-check"></i>
-                                <span>We'll notify you the moment we launch</span>
-                            </div>
-                            <div class="success-message" id="successMessage">
-                                <i data-lucide="check-circle"></i>
-                                <span>Welcome to the ApanaGhr family! We'll be in touch soon.</span>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="trust-stats" data-aos="fade-up" data-aos-delay="400">
-                        <div class="stat-item">
-                            <div class="stat-number">500+</div>
-                            <div class="stat-label">Early Users</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">95%</div>
-                            <div class="stat-label">Match Success</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">1000+</div>
-                            <div class="stat-label">Verified Properties</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
@@ -455,32 +471,75 @@
                         <span class="logo-text">ApanaGhr</span>
                     </div>
                     <p class="footer-description">
-                        Making room and roommate finding smarter, safer, and simpler with AI.
+                        Making student housing smarter, safer, and simpler with AI-powered matching technology.
                     </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <i data-lucide="twitter"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <i data-lucide="instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <i data-lucide="linkedin"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <i data-lucide="facebook"></i>
+                        </a>
+                    </div>
                 </div>
                 <div class="footer-links">
-                    <a href="#" class="footer-link">Privacy Policy</a>
-                    <a href="#" class="footer-link">Terms of Service</a>
-                    <a href="#" class="footer-link">Contact Us</a>
+                    <div class="link-group">
+                        <h4 class="link-title">Product</h4>
+                        <a href="#features" class="footer-link">Features</a>
+                        <a href="#how-it-works" class="footer-link">How It Works</a>
+                        <a href="#" class="footer-link">Pricing</a>
+                        <a href="#" class="footer-link">FAQ</a>
+                    </div>
+                    <div class="link-group">
+                        <h4 class="link-title">Company</h4>
+                        <a href="#" class="footer-link">About Us</a>
+                        <a href="#" class="footer-link">Careers</a>
+                        <a href="#" class="footer-link">Blog</a>
+                        <a href="#" class="footer-link">Contact</a>
+                    </div>
+                    <div class="link-group">
+                        <h4 class="link-title">Legal</h4>
+                        <a href="#" class="footer-link">Privacy Policy</a>
+                        <a href="#" class="footer-link">Terms of Service</a>
+                        <a href="#" class="footer-link">Cookie Policy</a>
+                        <a href="#" class="footer-link">Refund Policy</a>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p class="footer-copyright">
-                    © 2025 ApanaGhr. Built with <span class="heart">❤️</span> for students.
+                    © 2025 ApanaGhr. All rights reserved. Built with <span class="heart">❤️</span> for students.
                 </p>
+                <div class="footer-badges">
+                    <span class="badge">🇮🇳 Made in India</span>
+                    <span class="badge">🛡️ Privacy First</span>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Progress Indicator -->
-    <div class="story-progress">
-        <div class="progress-bar" id="progressBar"></div>
-        <div class="progress-dots">
-            <div class="progress-dot active" data-scene="1"></div>
-            <div class="progress-dot" data-scene="2"></div>
-            <div class="progress-dot" data-scene="3"></div>
-            <div class="progress-dot" data-scene="4"></div>
-            <div class="progress-dot" data-scene="5"></div>
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i data-lucide="arrow-up"></i>
+    </button>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="logo-icon">
+                    <i data-lucide="home"></i>
+                </div>
+                <span class="logo-text">ApanaGhr</span>
+            </div>
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Preparing your perfect match...</p>
         </div>
     </div>
 

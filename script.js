@@ -1,6 +1,14 @@
 // GSAP Registration
 gsap.registerPlugin(ScrollTrigger);
 
+// Loading Screen
+window.addEventListener('load', () => {
+    const loadingScreen = document.getElementById('loadingScreen');
+    setTimeout(() => {
+        loadingScreen.classList.add('hidden');
+    }, 1500);
+});
+
 // Theme Toggle Functionality
 const themeToggle = document.getElementById('themeToggle');
 const body = document.body;
@@ -69,6 +77,15 @@ emailForm.addEventListener('submit', async (e) => {
         // Store email in localStorage for demo purposes
         localStorage.setItem('apanaghr_email', email);
         
+        // Track conversion (you can integrate with analytics here)
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'conversion', {
+                'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL',
+                'value': 1.0,
+                'currency': 'USD'
+            });
+        }
+        
         // Reset form after 5 seconds
         setTimeout(() => {
             emailInput.parentElement.style.display = 'block';
@@ -119,176 +136,138 @@ function showError(message) {
     }, 3000);
 }
 
-// Add CSS for spin animation
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes spin {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-    }
-`;
-document.head.appendChild(style);
-
-// Story Progress Tracking
-const progressBar = document.getElementById('progressBar');
-const progressDots = document.querySelectorAll('.progress-dot');
-const scenes = document.querySelectorAll('.story-scene, .features-section');
-
-// Update progress based on scroll
-function updateProgress() {
-    const scrollTop = window.pageYOffset;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollPercent = (scrollTop / docHeight) * 100;
-    
-    if (progressBar) {
-        progressBar.style.setProperty('--progress', `${scrollPercent}%`);
-        progressBar.style.background = `linear-gradient(to top, var(--primary-accent) ${scrollPercent}%, var(--border-color) ${scrollPercent}%)`;
-    }
-    
-    // Update active scene
-    scenes.forEach((scene, index) => {
-        const rect = scene.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight / 2 && rect.bottom > window.innerHeight / 2;
-        
-        if (isVisible) {
-            progressDots.forEach(dot => dot.classList.remove('active'));
-            if (progressDots[index]) {
-                progressDots[index].classList.add('active');
-            }
-        }
-    });
-}
-
-// Progress dot click handlers
-progressDots.forEach((dot, index) => {
-    dot.addEventListener('click', () => {
-        const targetScene = scenes[index];
-        if (targetScene) {
-            targetScene.scrollIntoView({ 
+// Smooth Scrolling for Navigation Links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
                 behavior: 'smooth',
-                block: 'center'
+                block: 'start'
             });
         }
     });
 });
 
+// Back to Top Button
+const backToTopBtn = document.getElementById('backToTop');
+
+function updateBackToTopVisibility() {
+    if (window.pageYOffset > 300) {
+        backToTopBtn.classList.add('visible');
+    } else {
+        backToTopBtn.classList.remove('visible');
+    }
+}
+
+backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+// Header Background on Scroll
+function updateHeaderBackground() {
+    const header = document.querySelector('.header');
+    if (window.pageYOffset > 50) {
+        header.style.background = 'rgba(250, 250, 250, 0.98)';
+        header.style.backdropFilter = 'blur(20px)';
+    } else {
+        header.style.background = 'rgba(250, 250, 250, 0.95)';
+        header.style.backdropFilter = 'blur(20px)';
+    }
+}
+
 // GSAP Scroll Animations
 function initScrollAnimations() {
-    // Scene 1 - Character animations
+    // Hero section animations
     gsap.timeline({
         scrollTrigger: {
-            trigger: "#scene1",
+            trigger: ".hero-section",
             start: "top center",
             end: "bottom center",
             toggleActions: "play none none reverse"
         }
     })
-    .from("#scene1 .character-angry", { x: -100, opacity: 0, duration: 1 })
-    .from("#scene1 .character-party", { x: 100, opacity: 0, duration: 1 }, "-=0.5")
-    .from("#scene1 .speech-bubble", { scale: 0, opacity: 0, duration: 0.5 }, "-=0.3")
-    .from("#scene1 .music-notes .note", { 
-        y: -20, 
-        opacity: 0, 
-        duration: 0.3, 
-        stagger: 0.1 
-    }, "-=0.2");
-
-    // Scene 2 - Unsafe environment
-    gsap.timeline({
-        scrollTrigger: {
-            trigger: "#scene2",
-            start: "top center",
-            end: "bottom center",
-            toggleActions: "play none none reverse"
-        }
-    })
-    .from("#scene2 .character-scared", { y: 50, opacity: 0, duration: 1 })
-    .from("#scene2 .unsafe-environment", { scale: 0.8, opacity: 0, duration: 0.8 }, "-=0.5")
-    .from("#scene2 .failed-attempts > *", { 
-        x: -30, 
+    .from(".hero-text", { x: -50, opacity: 0, duration: 1 })
+    .from(".hero-visual", { x: 50, opacity: 0, duration: 1 }, "-=0.5")
+    .from(".floating-notifications .notification", { 
+        scale: 0, 
         opacity: 0, 
         duration: 0.5, 
-        stagger: 0.2 
+        stagger: 0.3 
     }, "-=0.3");
 
-    // Scene 3 - Wishlist animation
+    // Features section animation
     gsap.timeline({
         scrollTrigger: {
-            trigger: "#scene3",
+            trigger: ".features-section",
             start: "top center",
             end: "bottom center",
             toggleActions: "play none none reverse"
         }
     })
-    .from("#scene3 .character-hopeful", { scale: 0.8, opacity: 0, duration: 1 })
-    .from("#scene3 .wishlist", { y: 50, opacity: 0, duration: 0.8 }, "-=0.5")
-    .from("#scene3 .wishlist-item", { 
-        x: -20, 
+    .from(".section-header", { y: 30, opacity: 0, duration: 1 })
+    .from(".feature-card", { 
+        y: 50, 
         opacity: 0, 
-        duration: 0.3, 
-        stagger: 0.1 
-    }, "-=0.3")
-    .from("#scene3 .star", { 
-        scale: 0, 
-        opacity: 0, 
-        duration: 0.5, 
-        stagger: 0.1 
+        duration: 0.8, 
+        stagger: 0.2 
     }, "-=0.5");
 
-    // Scene 4 - Success animation
+    // How it works animation
     gsap.timeline({
         scrollTrigger: {
-            trigger: "#scene4",
+            trigger: ".how-it-works-section",
             start: "top center",
             end: "bottom center",
             toggleActions: "play none none reverse"
         }
     })
-    .from("#scene4 .character-happy", { scale: 0.8, opacity: 0, duration: 1 })
-    .from("#scene4 .app-mockup", { y: 50, opacity: 0, duration: 0.8 }, "-=0.5")
-    .from("#scene4 .celebration-effects .confetti", { 
-        y: -30, 
-        opacity: 0, 
-        duration: 0.5, 
-        stagger: 0.1 
-    }, "-=0.3")
-    .from("#scene4 .success-indicators .indicator", { 
-        scale: 0, 
-        opacity: 0, 
-        duration: 0.3, 
-        stagger: 0.1 
-    }, "-=0.2");
-
-    // Features Section animation
-    gsap.timeline({
-        scrollTrigger: {
-            trigger: "#features",
-            start: "top center",
-            end: "bottom center",
-            toggleActions: "play none none reverse"
-        }
-    })
-    .from("#features .features-header", { y: 30, opacity: 0, duration: 1 })
-    .from("#features .feature-card", { 
+    .from(".section-header", { y: 30, opacity: 0, duration: 1 })
+    .from(".step-item", { 
         y: 50, 
         opacity: 0, 
         duration: 0.8, 
         stagger: 0.2 
     }, "-=0.5")
-    .from("#features .features-cta", { y: 30, opacity: 0, duration: 0.8 }, "-=0.3");
+    .from(".step-connector", { 
+        scaleX: 0, 
+        duration: 0.5, 
+        stagger: 0.2 
+    }, "-=0.3");
 
-    // CTA Section animation
+    // Testimonials animation
     gsap.timeline({
         scrollTrigger: {
-            trigger: "#cta",
+            trigger: ".testimonials-section",
             start: "top center",
             end: "bottom center",
             toggleActions: "play none none reverse"
         }
     })
-    .from("#cta .cta-text", { y: 30, opacity: 0, duration: 1 })
-    .from("#cta .email-form-container", { y: 30, opacity: 0, duration: 0.8 }, "-=0.5")
-    .from("#cta .trust-stats .stat-item", { 
+    .from(".section-header", { y: 30, opacity: 0, duration: 1 })
+    .from(".testimonial-card", { 
+        y: 50, 
+        opacity: 0, 
+        duration: 0.8, 
+        stagger: 0.2 
+    }, "-=0.5");
+
+    // Waitlist section animation
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: ".waitlist-section",
+            start: "top center",
+            end: "bottom center",
+            toggleActions: "play none none reverse"
+        }
+    })
+    .from(".waitlist-text", { y: 30, opacity: 0, duration: 1 })
+    .from(".email-form-container", { y: 30, opacity: 0, duration: 0.8 }, "-=0.5")
+    .from(".social-proof .proof-item", { 
         y: 20, 
         opacity: 0, 
         duration: 0.5, 
@@ -296,31 +275,29 @@ function initScrollAnimations() {
     }, "-=0.3");
 
     // Continuous animations
-    gsap.to(".music-notes .note", {
+    gsap.to(".floating-icon", {
         y: -10,
-        duration: 2,
-        ease: "power2.inOut",
-        stagger: 0.3,
-        repeat: -1,
-        yoyo: true
-    });
-
-    gsap.to(".star", {
-        scale: 1.2,
-        opacity: 1,
-        duration: 2,
-        ease: "power2.inOut",
-        stagger: 0.5,
-        repeat: -1,
-        yoyo: true
-    });
-
-    gsap.to(".confetti", {
-        rotation: 360,
-        y: 20,
         duration: 3,
         ease: "power2.inOut",
         stagger: 0.5,
+        repeat: -1,
+        yoyo: true
+    });
+
+    gsap.to(".phone-mockup", {
+        y: -8,
+        rotation: 1,
+        duration: 4,
+        ease: "power2.inOut",
+        repeat: -1,
+        yoyo: true
+    });
+
+    gsap.to(".floating-notifications .notification", {
+        y: -5,
+        duration: 2,
+        ease: "power2.inOut",
+        stagger: 0.3,
         repeat: -1,
         yoyo: true
     });
@@ -328,125 +305,33 @@ function initScrollAnimations() {
 
 // Parallax Effects
 function initParallaxEffects() {
-    // Background parallax for each scene
-    scenes.forEach((scene, index) => {
-        const background = scene.querySelector('.scene-background');
-        if (background) {
-            gsap.to(background, {
-                yPercent: -50,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: scene,
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: true
-                }
-            });
-        }
-    });
-
-    // Character floating animations
-    gsap.to(".character", {
-        y: -5,
-        duration: 3,
-        ease: "power2.inOut",
-        repeat: -1,
-        yoyo: true,
-        stagger: 0.5
-    });
-
-    // Phone mockup floating
-    gsap.to(".phone-frame", {
-        y: -8,
-        rotation: 2,
-        duration: 4,
-        ease: "power2.inOut",
-        repeat: -1,
-        yoyo: true
-    });
-
-    // Feature cards hover effect
-    gsap.to(".feature-card", {
-        y: -2,
-        duration: 2,
-        ease: "power2.inOut",
-        repeat: -1,
-        yoyo: true,
-        stagger: 0.3
-    });
-}
-
-// Smooth scrolling for navigation
-function initSmoothScrolling() {
-    // Scroll indicator click
-    const scrollIndicator = document.querySelector('.scroll-indicator');
-    if (scrollIndicator) {
-        scrollIndicator.addEventListener('click', () => {
-            const nextScene = document.getElementById('scene2');
-            if (nextScene) {
-                nextScene.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'center'
-                });
-            }
-        });
-    }
-}
-
-// Header background opacity on scroll
-function initHeaderEffects() {
-    const header = document.querySelector('.header');
-    
-    gsap.to(header, {
-        backgroundColor: "rgba(250, 250, 250, 0.98)",
-        backdropFilter: "blur(20px)",
+    // Background parallax
+    gsap.to(".hero-pattern", {
+        yPercent: -50,
+        ease: "none",
         scrollTrigger: {
-            trigger: "body",
-            start: "top -50px",
-            end: "top -51px",
-            toggleActions: "play none none reverse"
+            trigger: ".hero-section",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true
+        }
+    });
+
+    gsap.to(".waitlist-pattern", {
+        yPercent: -30,
+        ease: "none",
+        scrollTrigger: {
+            trigger: ".waitlist-section",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true
         }
     });
 }
 
-// Character interaction effects
-function initCharacterInteractions() {
-    // Add hover effects to characters
-    document.querySelectorAll('.character').forEach(character => {
-        character.addEventListener('mouseenter', () => {
-            gsap.to(character, {
-                scale: 1.05,
-                duration: 0.3,
-                ease: "power2.out"
-            });
-        });
-        
-        character.addEventListener('mouseleave', () => {
-            gsap.to(character, {
-                scale: 1,
-                duration: 0.3,
-                ease: "power2.out"
-            });
-        });
-    });
-
-    // Speech bubble animations
-    document.querySelectorAll('.speech-bubble, .thought-bubble').forEach(bubble => {
-        gsap.set(bubble, { scale: 0 });
-        
-        gsap.to(bubble, {
-            scale: 1,
-            duration: 0.5,
-            ease: "back.out(1.7)",
-            scrollTrigger: {
-                trigger: bubble.closest('.story-scene'),
-                start: "top center",
-                toggleActions: "play none none reverse"
-            }
-        });
-    });
-
-    // Feature card interactions
+// Interactive Elements
+function initInteractiveElements() {
+    // Feature card hover effects
     document.querySelectorAll('.feature-card').forEach(card => {
         card.addEventListener('mouseenter', () => {
             gsap.to(card.querySelector('.feature-icon'), {
@@ -466,30 +351,44 @@ function initCharacterInteractions() {
             });
         });
     });
-}
 
-// Initialize all animations and effects
-function initializeApp() {
-    // Initialize GSAP animations
-    initScrollAnimations();
-    initParallaxEffects();
-    initSmoothScrolling();
-    initHeaderEffects();
-    initCharacterInteractions();
-    
-    // Add scroll listener for progress tracking
-    window.addEventListener('scroll', updateProgress);
-    
-    // Initial progress update
-    updateProgress();
-    
-    console.log('ApanaGhr Comic Story loaded successfully!');
-    
-    // Check if user has already submitted email
-    const savedEmail = localStorage.getItem('apanaghr_email');
-    if (savedEmail) {
-        console.log('User previously joined waitlist:', savedEmail);
-    }
+    // Button hover effects
+    document.querySelectorAll('.primary-btn, .secondary-btn, .notify-btn').forEach(btn => {
+        btn.addEventListener('mouseenter', () => {
+            gsap.to(btn, {
+                scale: 1.05,
+                duration: 0.2,
+                ease: "power2.out"
+            });
+        });
+        
+        btn.addEventListener('mouseleave', () => {
+            gsap.to(btn, {
+                scale: 1,
+                duration: 0.2,
+                ease: "power2.out"
+            });
+        });
+    });
+
+    // Testimonial card interactions
+    document.querySelectorAll('.testimonial-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            gsap.to(card, {
+                scale: 1.02,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            gsap.to(card, {
+                scale: 1,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        });
+    });
 }
 
 // Performance optimization: Debounce scroll events
@@ -505,40 +404,19 @@ function debounce(func, wait) {
     };
 }
 
-// Apply debouncing to scroll handler
-const debouncedUpdateProgress = debounce(updateProgress, 10);
-window.addEventListener('scroll', debouncedUpdateProgress);
+// Apply debouncing to scroll handlers
+const debouncedBackToTop = debounce(updateBackToTopVisibility, 10);
+const debouncedHeaderUpdate = debounce(updateHeaderBackground, 10);
+
+window.addEventListener('scroll', () => {
+    debouncedBackToTop();
+    debouncedHeaderUpdate();
+});
 
 // Keyboard navigation support
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Tab') {
         document.body.classList.add('keyboard-navigation');
-    }
-    
-    // Arrow key navigation between scenes
-    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-        e.preventDefault();
-        const currentScene = document.querySelector('.story-scene:hover, .features-section:hover') || 
-                           Array.from(scenes).find(scene => {
-                               const rect = scene.getBoundingClientRect();
-                               return rect.top < window.innerHeight / 2 && rect.bottom > window.innerHeight / 2;
-                           });
-        
-        if (currentScene) {
-            const currentIndex = Array.from(scenes).indexOf(currentScene);
-            let targetIndex;
-            
-            if (e.key === 'ArrowDown') {
-                targetIndex = Math.min(currentIndex + 1, scenes.length - 1);
-            } else {
-                targetIndex = Math.max(currentIndex - 1, 0);
-            }
-            
-            scenes[targetIndex].scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'center'
-            });
-        }
     }
 });
 
@@ -556,6 +434,26 @@ keyboardStyle.textContent = `
 `;
 document.head.appendChild(keyboardStyle);
 
+// Initialize all functionality
+function initializeApp() {
+    // Initialize GSAP animations
+    initScrollAnimations();
+    initParallaxEffects();
+    initInteractiveElements();
+    
+    // Initial updates
+    updateBackToTopVisibility();
+    updateHeaderBackground();
+    
+    console.log('ApanaGhr Landing Page loaded successfully!');
+    
+    // Check if user has already submitted email
+    const savedEmail = localStorage.getItem('apanaghr_email');
+    if (savedEmail) {
+        console.log('User previously joined waitlist:', savedEmail);
+    }
+}
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', initializeApp);
 
@@ -563,3 +461,58 @@ document.addEventListener('DOMContentLoaded', initializeApp);
 window.addEventListener('resize', debounce(() => {
     ScrollTrigger.refresh();
 }, 250));
+
+// Add CSS for additional animations
+const additionalStyles = document.createElement('style');
+additionalStyles.textContent = `
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+    
+    .error-message {
+        animation: slideUp 0.5s ease !important;
+    }
+`;
+document.head.appendChild(additionalStyles);
+
+// Analytics and tracking (placeholder for future integration)
+function trackEvent(eventName, eventData = {}) {
+    // Google Analytics 4
+    if (typeof gtag !== 'undefined') {
+        gtag('event', eventName, eventData);
+    }
+    
+    // Facebook Pixel
+    if (typeof fbq !== 'undefined') {
+        fbq('track', eventName, eventData);
+    }
+    
+    // Custom analytics
+    console.log('Event tracked:', eventName, eventData);
+}
+
+// Track page interactions
+document.addEventListener('click', (e) => {
+    const target = e.target.closest('button, a');
+    if (target) {
+        const action = target.textContent.trim() || target.getAttribute('aria-label');
+        trackEvent('click', {
+            element: target.tagName.toLowerCase(),
+            action: action,
+            section: target.closest('section')?.id || 'unknown'
+        });
+    }
+});
+
+// Track scroll depth
+let maxScrollDepth = 0;
+window.addEventListener('scroll', debounce(() => {
+    const scrollDepth = Math.round((window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+    if (scrollDepth > maxScrollDepth) {
+        maxScrollDepth = scrollDepth;
+        if (maxScrollDepth % 25 === 0) { // Track at 25%, 50%, 75%, 100%
+            trackEvent('scroll_depth', { depth: maxScrollDepth });
+        }
+    }
+}, 1000));
