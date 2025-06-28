@@ -196,7 +196,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe elements for scroll animations
-document.querySelectorAll('.feature-card, .feature-card-item, .stat-card').forEach(card => {
+document.querySelectorAll('.feature-card, .feature-item').forEach(card => {
     card.style.opacity = '0';
     card.style.transform = 'translateY(20px)';
     card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -309,50 +309,23 @@ document.querySelectorAll('.social-link').forEach(link => {
     });
 });
 
-// Animate progress bars on scroll
+// Animate progress bar on scroll
 const progressObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            // Animate mini progress bars
-            const miniProgressBars = entry.target.querySelectorAll('.progress-fill-mini');
-            miniProgressBars.forEach(bar => {
-                const targetWidth = bar.style.width;
-                bar.style.width = '0%';
+            const progressFill = entry.target.querySelector('.progress-fill');
+            if (progressFill) {
+                // Trigger the animation
+                progressFill.style.width = '0%';
                 setTimeout(() => {
-                    bar.style.width = targetWidth;
-                }, 100);
-            });
-            
-            // Animate large progress bar
-            const largeProgressBar = entry.target.querySelector('.progress-fill-large');
-            if (largeProgressBar) {
-                largeProgressBar.style.width = '0%';
-                setTimeout(() => {
-                    largeProgressBar.style.width = '68%';
+                    progressFill.style.width = '65%';
                 }, 100);
             }
         }
     });
-}, { threshold: 0.3 });
+}, { threshold: 0.5 });
 
-// Observe progress sections
-const progressSections = document.querySelectorAll('.feature-card-item, .development-summary');
-progressSections.forEach(section => {
-    progressObserver.observe(section);
-});
-
-// Add staggered animation for feature cards
-const featureCardsObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-            setTimeout(() => {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }, index * 100);
-        }
-    });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.feature-card-item').forEach(card => {
-    featureCardsObserver.observe(card);
-});
+const progressSection = document.querySelector('.development-progress');
+if (progressSection) {
+    progressObserver.observe(progressSection);
+}
