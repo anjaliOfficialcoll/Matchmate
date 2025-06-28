@@ -196,7 +196,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe elements for scroll animations
-document.querySelectorAll('.feature-card, .feature-item').forEach(card => {
+document.querySelectorAll('.feature-card').forEach(card => {
     card.style.opacity = '0';
     card.style.transform = 'translateY(20px)';
     card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -308,24 +308,3 @@ document.querySelectorAll('.social-link').forEach(link => {
         console.log(`Would navigate to ${platform} page`);
     });
 });
-
-// Animate progress bar on scroll
-const progressObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const progressFill = entry.target.querySelector('.progress-fill');
-            if (progressFill) {
-                // Trigger the animation
-                progressFill.style.width = '0%';
-                setTimeout(() => {
-                    progressFill.style.width = '65%';
-                }, 100);
-            }
-        }
-    });
-}, { threshold: 0.5 });
-
-const progressSection = document.querySelector('.development-progress');
-if (progressSection) {
-    progressObserver.observe(progressSection);
-}
