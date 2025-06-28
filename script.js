@@ -196,7 +196,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe elements for scroll animations
-document.querySelectorAll('.feature-card').forEach(card => {
+document.querySelectorAll('.feature-card, .testimonial-card, .trust-item').forEach(card => {
     card.style.opacity = '0';
     card.style.transform = 'translateY(20px)';
     card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -306,5 +306,40 @@ document.querySelectorAll('.social-link').forEach(link => {
         
         // In a real application, these would link to actual social media pages
         console.log(`Would navigate to ${platform} page`);
+    });
+});
+
+// Testimonials carousel functionality (optional enhancement)
+function initTestimonialsCarousel() {
+    const testimonialCards = document.querySelectorAll('.testimonial-card');
+    let currentIndex = 0;
+    
+    // Add subtle staggered animation to testimonials on load
+    testimonialCards.forEach((card, index) => {
+        setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, index * 200);
+    });
+}
+
+// Initialize testimonials when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    initTestimonialsCarousel();
+});
+
+// Add dynamic star rating animation
+document.querySelectorAll('.testimonial-rating').forEach(rating => {
+    const stars = rating.querySelectorAll('.star');
+    
+    rating.addEventListener('mouseenter', () => {
+        stars.forEach((star, index) => {
+            setTimeout(() => {
+                star.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    star.style.transform = 'scale(1)';
+                }, 100);
+            }, index * 50);
+        });
     });
 });
