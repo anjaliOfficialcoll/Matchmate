@@ -61,7 +61,7 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown(); // Initial call
 
-// Email Form Functionality
+// Enhanced Email Form Functionality
 const emailForm = document.getElementById('emailForm');
 const emailInput = document.getElementById('email');
 const successMessage = document.getElementById('successMessage');
@@ -73,6 +73,7 @@ emailForm.addEventListener('submit', async (e) => {
     const email = emailInput.value.trim();
     
     if (!email) {
+        showError('Please enter your email address');
         return;
     }
     
@@ -96,10 +97,10 @@ emailForm.addEventListener('submit', async (e) => {
     
     try {
         // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        await new Promise(resolve => setTimeout(resolve, 2000));
         
         // Show success message
-        emailInput.style.display = 'none';
+        emailInput.parentElement.style.display = 'none';
         notifyBtn.style.display = 'none';
         successMessage.classList.add('show');
         
@@ -108,7 +109,7 @@ emailForm.addEventListener('submit', async (e) => {
         
         // Reset form after 5 seconds
         setTimeout(() => {
-            emailInput.style.display = 'block';
+            emailInput.parentElement.style.display = 'block';
             notifyBtn.style.display = 'flex';
             successMessage.classList.remove('show');
             emailInput.value = '';
@@ -166,21 +167,24 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Smooth scrolling for any anchor links
+// Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
+            const headerHeight = document.querySelector('.header').offsetHeight;
+            const targetPosition = target.offsetTop - headerHeight - 20;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
             });
         }
     });
 });
 
-// Add intersection observer for animations
+// Enhanced scroll animations with intersection observer
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -203,15 +207,31 @@ document.querySelectorAll('.feature-card').forEach(card => {
     observer.observe(card);
 });
 
-// Add parallax effect to background circles
+// Enhanced parallax effect
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
-    const parallax = scrolled * 0.5;
+    const rate = scrolled * -0.5;
     
+    // Parallax for background circles
     document.querySelectorAll('.bg-circle').forEach((circle, index) => {
         const speed = (index + 1) * 0.1;
-        circle.style.transform = `translateY(${parallax * speed}px)`;
+        circle.style.transform = `translateY(${scrolled * speed}px)`;
     });
+    
+    // Parallax for floating cards
+    document.querySelectorAll('.floating-card').forEach((card, index) => {
+        const speed = (index + 1) * 0.05;
+        card.style.transform = `translateY(${scrolled * speed}px)`;
+    });
+    
+    // Header background opacity on scroll
+    const header = document.querySelector('.header');
+    const opacity = Math.min(scrolled / 100, 0.95);
+    if (scrolled > 50) {
+        header.style.background = `rgba(${document.body.getAttribute('data-theme') === 'dark' ? '15, 15, 15' : '250, 250, 250'}, ${opacity})`;
+    } else {
+        header.style.background = `rgba(${document.body.getAttribute('data-theme') === 'dark' ? '15, 15, 15' : '250, 250, 250'}, 0.95)`;
+    }
 });
 
 // Add keyboard navigation support
@@ -235,19 +255,7 @@ keyboardStyle.textContent = `
 `;
 document.head.appendChild(keyboardStyle);
 
-// Initialize any dynamic content
-document.addEventListener('DOMContentLoaded', () => {
-    // Add any initialization code here
-    console.log('ApanaGhr Coming Soon page loaded');
-    
-    // Check if user has already submitted email
-    const savedEmail = localStorage.getItem('apanaghr_email');
-    if (savedEmail) {
-        console.log('User previously showed interest:', savedEmail);
-    }
-});
-
-// Social media link interactions with proper platform detection
+// Social media link interactions with enhanced tooltips
 document.querySelectorAll('.social-link').forEach(link => {
     // Create tooltip element
     const tooltip = document.createElement('div');
@@ -266,18 +274,18 @@ document.querySelectorAll('.social-link').forEach(link => {
         white-space: nowrap;
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.3s ease;
+        transition: opacity 0.3s ease, transform 0.3s ease;
         z-index: 1000;
     `;
     
     // Determine platform based on icon class
     let platform = '';
     if (link.querySelector('.instagram-icon')) {
-        platform = 'Instagram';
+        platform = 'Follow on Instagram';
     } else if (link.querySelector('.linkedin-icon')) {
-        platform = 'LinkedIn';
+        platform = 'Connect on LinkedIn';
     } else if (link.querySelector('.twitter-icon')) {
-        platform = 'X (Twitter)';
+        platform = 'Follow on X';
     }
     
     tooltip.textContent = platform;
@@ -287,11 +295,13 @@ document.querySelectorAll('.social-link').forEach(link => {
     // Show tooltip on hover
     link.addEventListener('mouseenter', () => {
         tooltip.style.opacity = '1';
+        tooltip.style.transform = 'translateX(-50%) translateY(-4px)';
     });
     
     // Hide tooltip on leave
     link.addEventListener('mouseleave', () => {
         tooltip.style.opacity = '0';
+        tooltip.style.transform = 'translateX(-50%) translateY(0)';
     });
     
     // Click interaction
@@ -305,6 +315,79 @@ document.querySelectorAll('.social-link').forEach(link => {
         }, 150);
         
         // In a real application, these would link to actual social media pages
-        console.log(`Would navigate to ${platform} page`);
+        console.log(`Would navigate to ${platform}`);
     });
 });
+
+// Enhanced mockup interactions
+document.addEventListener('DOMContentLoaded', () => {
+    // Add subtle animations to mockup elements
+    const phoneScreen = document.querySelector('.phone-screen');
+    const desktopScreen = document.querySelector('.desktop-screen');
+    
+    if (phoneScreen) {
+        phoneScreen.addEventListener('mouseenter', () => {
+            phoneScreen.style.transform = 'scale(1.02)';
+        });
+        
+        phoneScreen.addEventListener('mouseleave', () => {
+            phoneScreen.style.transform = 'scale(1)';
+        });
+    }
+    
+    if (desktopScreen) {
+        desktopScreen.addEventListener('mouseenter', () => {
+            desktopScreen.style.transform = 'scale(1.02)';
+        });
+        
+        desktopScreen.addEventListener('mouseleave', () => {
+            desktopScreen.style.transform = 'scale(1)';
+        });
+    }
+    
+    // Initialize any dynamic content
+    console.log('ApanaGhr Enhanced Landing Page loaded');
+    
+    // Check if user has already submitted email
+    const savedEmail = localStorage.getItem('apanaghr_email');
+    if (savedEmail) {
+        console.log('User previously showed interest:', savedEmail);
+    }
+    
+    // Add loading animation to feature cards
+    const featureCards = document.querySelectorAll('.feature-card');
+    featureCards.forEach((card, index) => {
+        setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, index * 200);
+    });
+});
+
+// Performance optimization: Debounce scroll events
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Apply debouncing to scroll handler
+const debouncedScrollHandler = debounce(() => {
+    const scrolled = window.pageYOffset;
+    
+    // Only apply parallax on larger screens for performance
+    if (window.innerWidth > 768) {
+        document.querySelectorAll('.bg-circle').forEach((circle, index) => {
+            const speed = (index + 1) * 0.1;
+            circle.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+    }
+}, 10);
+
+window.addEventListener('scroll', debouncedScrollHandler);

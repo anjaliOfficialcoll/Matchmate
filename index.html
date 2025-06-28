@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ApanaGhr - Coming Soon</title>
+    <title>ApanaGhr - Smart Room & Roommate Matching</title>
+    <meta name="description" content="Find PGs, Flats, and Compatible Roommates with AI-powered matching. The smartest way to find your perfect stay.">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.344.0/lucide.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
@@ -20,6 +22,11 @@
                     </div>
                     <span class="logo-text">ApanaGhr</span>
                 </div>
+                <nav class="nav-menu">
+                    <a href="#features" class="nav-link">Features</a>
+                    <a href="#product" class="nav-link">Product</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </nav>
                 <button class="theme-toggle animate__animated animate__fadeInRight" id="themeToggle" aria-label="Toggle theme">
                     <i data-lucide="sun" class="sun-icon"></i>
                     <i data-lucide="moon" class="moon-icon"></i>
@@ -30,107 +37,164 @@
 
     <!-- Hero Section -->
     <main class="hero">
+        <div class="hero-background">
+            <div class="hero-pattern"></div>
+            <div class="hero-gradient"></div>
+        </div>
+        
         <div class="container">
             <div class="hero-content">
-                <div class="hero-text">
-                    <h1 class="hero-title animate__animated animate__fadeInUp animate__delay-1s">
-                        Coming Soon: Smarter Room & 
-                        <span class="highlight">Roommate Matching</span>
+                <div class="hero-text" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="hero-badge">
+                        <span class="badge-text">🚀 Coming Soon</span>
+                    </div>
+                    <h1 class="hero-title">
+                        Find Your Perfect
+                        <span class="highlight">Room & Roommate</span>
+                        with AI
                     </h1>
-                    <p class="hero-subtitle animate__animated animate__fadeInUp animate__delay-2s">
-                        Find PGs, Flats, and Compatible Roommates – Powered by AI.
+                    <p class="hero-subtitle">
+                        Discover verified PGs, flats, and compatible roommates through our intelligent matching system. 
+                        Your ideal living situation is just a click away.
                     </p>
                     
-                    <!-- AI Illustration -->
-                    <div class="hero-visual animate__animated animate__zoomIn animate__delay-3s">
-                        <div class="ai-illustration">
-                            <div class="ai-brain">
-                                <div class="brain-node node-1"></div>
-                                <div class="brain-node node-2"></div>
-                                <div class="brain-node node-3"></div>
-                                <div class="brain-node node-4"></div>
-                                <div class="brain-node node-5"></div>
-                                <div class="connection connection-1"></div>
-                                <div class="connection connection-2"></div>
-                                <div class="connection connection-3"></div>
-                                <div class="connection connection-4"></div>
+                    <!-- Enhanced Email Form -->
+                    <div class="email-form-container" data-aos="fade-up" data-aos-delay="200">
+                        <form class="email-form" id="emailForm">
+                            <div class="form-group">
+                                <div class="input-wrapper">
+                                    <i data-lucide="mail" class="input-icon"></i>
+                                    <input 
+                                        type="email" 
+                                        id="email" 
+                                        placeholder="Enter your email address" 
+                                        required
+                                        class="email-input"
+                                    >
+                                </div>
+                                <button type="submit" class="notify-btn">
+                                    <span class="btn-text">Get Early Access</span>
+                                    <i data-lucide="arrow-right" class="btn-icon"></i>
+                                </button>
                             </div>
-                            <div class="floating-icons">
-                                <div class="icon-item icon-1">
-                                    <i data-lucide="home"></i>
-                                </div>
-                                <div class="icon-item icon-2">
-                                    <i data-lucide="users"></i>
-                                </div>
-                                <div class="icon-item icon-3">
-                                    <i data-lucide="map-pin"></i>
-                                </div>
-                                <div class="icon-item icon-4">
-                                    <i data-lucide="heart"></i>
-                                </div>
+                            <div class="form-note">
+                                <i data-lucide="shield-check"></i>
+                                <span>No spam, unsubscribe anytime</span>
                             </div>
+                            <div class="success-message" id="successMessage">
+                                <i data-lucide="check-circle"></i>
+                                <span>Thanks! We'll keep you updated on our launch.</span>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Trust Indicators -->
+                    <div class="trust-indicators" data-aos="fade-up" data-aos-delay="400">
+                        <div class="trust-item">
+                            <i data-lucide="users"></i>
+                            <span>500+ Early Users</span>
+                        </div>
+                        <div class="trust-item">
+                            <i data-lucide="shield-check"></i>
+                            <span>100% Verified</span>
+                        </div>
+                        <div class="trust-item">
+                            <i data-lucide="star"></i>
+                            <span>AI-Powered</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Countdown Timer -->
-                <div class="countdown-section animate__animated animate__fadeInUp animate__delay-4s">
-                    <h3 class="countdown-title">Launching in:</h3>
-                    <div class="countdown-timer" id="countdownTimer">
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="days">30</span>
-                            <span class="countdown-label">Days</span>
+                <!-- Product Mockup -->
+                <div class="hero-visual" data-aos="fade-left" data-aos-delay="600">
+                    <div class="mockup-container">
+                        <!-- Phone Mockup -->
+                        <div class="phone-mockup">
+                            <div class="phone-frame">
+                                <div class="phone-screen">
+                                    <div class="mockup-header">
+                                        <div class="status-bar">
+                                            <span class="time">9:41</span>
+                                            <div class="indicators">
+                                                <i data-lucide="signal"></i>
+                                                <i data-lucide="wifi"></i>
+                                                <i data-lucide="battery"></i>
+                                            </div>
+                                        </div>
+                                        <div class="app-header">
+                                            <div class="app-logo">
+                                                <i data-lucide="home"></i>
+                                            </div>
+                                            <span class="app-name">ApanaGhr</span>
+                                        </div>
+                                    </div>
+                                    <div class="mockup-content">
+                                        <div class="search-section">
+                                            <div class="search-bar">
+                                                <i data-lucide="search"></i>
+                                                <span>Find rooms near you...</span>
+                                            </div>
+                                            <div class="filter-chips">
+                                                <span class="chip active">PG</span>
+                                                <span class="chip">Flat</span>
+                                                <span class="chip">Roommate</span>
+                                            </div>
+                                        </div>
+                                        <div class="room-cards">
+                                            <div class="room-card">
+                                                <div class="room-image"></div>
+                                                <div class="room-info">
+                                                    <h4>Cozy PG Near College</h4>
+                                                    <p>₹8,000/month</p>
+                                                    <div class="room-features">
+                                                        <span>🏠 Furnished</span>
+                                                        <span>🍽️ Meals</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="room-card">
+                                                <div class="room-image"></div>
+                                                <div class="room-info">
+                                                    <h4>Modern Flat Share</h4>
+                                                    <p>₹12,000/month</p>
+                                                    <div class="room-features">
+                                                        <span>🏠 2BHK</span>
+                                                        <span>🚗 Parking</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="hours">10</span>
-                            <span class="countdown-label">Hours</span>
-                        </div>
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="minutes">55</span>
-                            <span class="countdown-label">Minutes</span>
-                        </div>
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="seconds">30</span>
-                            <span class="countdown-label">Seconds</span>
+
+                        <!-- Floating Elements -->
+                        <div class="floating-elements">
+                            <div class="floating-card card-1">
+                                <i data-lucide="brain"></i>
+                                <span>AI Match: 95%</span>
+                            </div>
+                            <div class="floating-card card-2">
+                                <i data-lucide="map-pin"></i>
+                                <span>2.5km away</span>
+                            </div>
+                            <div class="floating-card card-3">
+                                <i data-lucide="users"></i>
+                                <span>3 Roommates</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Email Form -->
-                <div class="email-form-container animate__animated animate__fadeInUp animate__delay-5s">
-                    <form class="email-form" id="emailForm">
-                        <div class="form-group">
-                            <input 
-                                type="email" 
-                                id="email" 
-                                placeholder="Enter your email" 
-                                required
-                                class="email-input"
-                            >
-                            <button type="submit" class="notify-btn">
-                                <span class="btn-text">Notify Me</span>
-                                <i data-lucide="arrow-right" class="btn-icon"></i>
-                            </button>
-                        </div>
-                        <div class="success-message" id="successMessage">
-                            <i data-lucide="check-circle"></i>
-                            <span>Thanks! We'll keep you updated.</span>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
 
         <!-- Enhanced Background Elements -->
         <div class="bg-elements">
-            <!-- Animated Background Circles -->
             <div class="bg-circle circle-1"></div>
             <div class="bg-circle circle-2"></div>
             <div class="bg-circle circle-3"></div>
-            
-            <!-- Housing-themed Background Illustrations -->
             <div class="bg-illustration">
-                <!-- Building Silhouettes -->
                 <div class="building building-1">
                     <div class="building-floor"></div>
                     <div class="building-floor"></div>
@@ -149,67 +213,187 @@
                     <div class="building-floor"></div>
                     <div class="building-floor"></div>
                 </div>
-                
-                <!-- Floating House Icons -->
-                <div class="floating-house house-1">
-                    <i data-lucide="home"></i>
-                </div>
-                <div class="floating-house house-2">
-                    <i data-lucide="building-2"></i>
-                </div>
-                <div class="floating-house house-3">
-                    <i data-lucide="map-pin"></i>
-                </div>
-                
-                <!-- Connection Lines -->
-                <div class="connection-line line-1"></div>
-                <div class="connection-line line-2"></div>
-                <div class="connection-line line-3"></div>
-                
-                <!-- Floating Particles -->
-                <div class="particle particle-1"></div>
-                <div class="particle particle-2"></div>
-                <div class="particle particle-3"></div>
-                <div class="particle particle-4"></div>
-                <div class="particle particle-5"></div>
-                <div class="particle particle-6"></div>
             </div>
         </div>
     </main>
 
-    <!-- Feature Preview Section -->
-    <section class="features-section">
+    <!-- Features Section -->
+    <section class="features-section" id="features">
         <div class="container">
-            <h2 class="features-title">What Makes ApanaGhr Special</h2>
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Why Choose ApanaGhr?</h2>
+                <p class="section-subtitle">
+                    Experience the future of room and roommate finding with our AI-powered platform
+                </p>
+            </div>
+            
             <div class="features-grid">
-                <div class="feature-card">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="feature-icon-wrapper">
                         <div class="feature-icon">
                             <i data-lucide="building-2"></i>
                         </div>
                     </div>
-                    <h3 class="feature-title">PG & Flat Listings</h3>
-                    <p class="feature-description">Verified accommodations in your city</p>
+                    <h3 class="feature-title">Verified Listings</h3>
+                    <p class="feature-description">
+                        Browse through thousands of verified PGs and flats with authentic photos and details
+                    </p>
+                    <div class="feature-stats">
+                        <span class="stat">1000+ Properties</span>
+                    </div>
                 </div>
                 
-                <div class="feature-card">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="feature-icon-wrapper">
                         <div class="feature-icon">
                             <i data-lucide="brain"></i>
                         </div>
                     </div>
                     <h3 class="feature-title">AI Matchmaking</h3>
-                    <p class="feature-description">Personalized roommate matching using AI</p>
+                    <p class="feature-description">
+                        Our advanced AI analyzes your preferences to find the perfect roommate compatibility
+                    </p>
+                    <div class="feature-stats">
+                        <span class="stat">95% Match Rate</span>
+                    </div>
                 </div>
                 
-                <div class="feature-card">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
                     <div class="feature-icon-wrapper">
                         <div class="feature-icon">
                             <i data-lucide="shield-check"></i>
                         </div>
                     </div>
-                    <h3 class="feature-title">Secure Connect</h3>
-                    <p class="feature-description">Chat before finalizing your stay</p>
+                    <h3 class="feature-title">Safe & Secure</h3>
+                    <p class="feature-description">
+                        Connect safely with verified profiles and secure in-app messaging system
+                    </p>
+                    <div class="feature-stats">
+                        <span class="stat">100% Verified</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Preview Section -->
+    <section class="product-section" id="product">
+        <div class="container">
+            <div class="product-content">
+                <div class="product-text" data-aos="fade-right">
+                    <h2 class="product-title">See ApanaGhr in Action</h2>
+                    <p class="product-description">
+                        Get a sneak peek at our intuitive interface designed to make finding your perfect room and roommate effortless.
+                    </p>
+                    
+                    <div class="product-features">
+                        <div class="product-feature">
+                            <i data-lucide="search"></i>
+                            <div>
+                                <h4>Smart Search</h4>
+                                <p>Filter by budget, location, and preferences</p>
+                            </div>
+                        </div>
+                        <div class="product-feature">
+                            <i data-lucide="heart"></i>
+                            <div>
+                                <h4>Compatibility Score</h4>
+                                <p>AI-powered roommate matching algorithm</p>
+                            </div>
+                        </div>
+                        <div class="product-feature">
+                            <i data-lucide="message-circle"></i>
+                            <div>
+                                <h4>Secure Chat</h4>
+                                <p>Connect safely before making decisions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-mockups" data-aos="fade-left">
+                    <!-- Desktop Mockup -->
+                    <div class="desktop-mockup">
+                        <div class="desktop-frame">
+                            <div class="desktop-header">
+                                <div class="window-controls">
+                                    <span class="control red"></span>
+                                    <span class="control yellow"></span>
+                                    <span class="control green"></span>
+                                </div>
+                                <div class="address-bar">
+                                    <span>apanaghr.com</span>
+                                </div>
+                            </div>
+                            <div class="desktop-screen">
+                                <div class="desktop-content">
+                                    <div class="dashboard-header">
+                                        <h3>Your Dashboard</h3>
+                                        <div class="user-profile">
+                                            <div class="avatar"></div>
+                                            <span>John Doe</span>
+                                        </div>
+                                    </div>
+                                    <div class="dashboard-grid">
+                                        <div class="dashboard-card">
+                                            <h4>Saved Properties</h4>
+                                            <span class="card-number">12</span>
+                                        </div>
+                                        <div class="dashboard-card">
+                                            <h4>Messages</h4>
+                                            <span class="card-number">5</span>
+                                        </div>
+                                        <div class="dashboard-card">
+                                            <h4>Matches</h4>
+                                            <span class="card-number">8</span>
+                                        </div>
+                                    </div>
+                                    <div class="recent-activity">
+                                        <h4>Recent Activity</h4>
+                                        <div class="activity-list">
+                                            <div class="activity-item">
+                                                <div class="activity-icon"></div>
+                                                <span>New match found: Sarah K.</span>
+                                            </div>
+                                            <div class="activity-item">
+                                                <div class="activity-icon"></div>
+                                                <span>Property saved: Modern PG</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Countdown Section -->
+    <section class="countdown-section">
+        <div class="container">
+            <div class="countdown-content" data-aos="fade-up">
+                <h2 class="countdown-title">Launching Soon</h2>
+                <p class="countdown-subtitle">Be among the first to experience the future of room finding</p>
+                
+                <div class="countdown-timer" id="countdownTimer">
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="days">30</span>
+                        <span class="countdown-label">Days</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="hours">10</span>
+                        <span class="countdown-label">Hours</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="minutes">55</span>
+                        <span class="countdown-label">Minutes</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="seconds">30</span>
+                        <span class="countdown-label">Seconds</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -218,8 +402,9 @@
     <!-- Social Media Section -->
     <section class="social-section">
         <div class="container">
-            <div class="social-content">
+            <div class="social-content" data-aos="fade-up">
                 <h3 class="social-title">Follow Our Journey</h3>
+                <p class="social-subtitle">Stay updated with our latest developments and launch updates</p>
                 <div class="social-links">
                     <a href="#" class="social-link" aria-label="Follow us on Instagram">
                         <svg class="instagram-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -242,29 +427,50 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" id="contact">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-main">
+                    <div class="footer-brand">
+                        <div class="footer-logo">
+                            <div class="logo-icon">
+                                <i data-lucide="home"></i>
+                            </div>
+                            <span class="logo-text">ApanaGhr</span>
+                        </div>
+                        <p class="footer-description">
+                            Making room and roommate finding smarter, safer, and simpler with AI.
+                        </p>
+                    </div>
+                    <div class="footer-links-section">
+                        <div class="footer-links">
+                            <a href="#" class="footer-link">Privacy Policy</a>
+                            <a href="#" class="footer-link">Terms of Service</a>
+                            <a href="#" class="footer-link">Contact Us</a>
+                            <a href="#" class="footer-link">Support</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
                     <p class="footer-copyright">
                         © 2025 ApanaGhr. Built with <span class="heart">❤️</span> in India.
                     </p>
-                    <div class="footer-links">
-                        <a href="#" class="footer-link">Privacy</a>
-                        <span class="footer-divider">|</span>
-                        <a href="#" class="footer-link">Terms</a>
-                        <span class="footer-divider">|</span>
-                        <a href="#" class="footer-link">Contact</a>
-                    </div>
                 </div>
             </div>
         </div>
     </footer>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="script.js"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script>
         lucide.createIcons();
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100
+        });
     </script>
 </body>
 </html>
