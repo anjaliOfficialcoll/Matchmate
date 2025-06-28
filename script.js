@@ -132,7 +132,7 @@ document.head.appendChild(style);
 // Story Progress Tracking
 const progressBar = document.getElementById('progressBar');
 const progressDots = document.querySelectorAll('.progress-dot');
-const scenes = document.querySelectorAll('.story-scene, .features-section');
+const scenes = document.querySelectorAll('.story-scene, .features-section, .main-title-section');
 
 // Update progress based on scroll
 function updateProgress() {
@@ -259,6 +259,20 @@ function initScrollAnimations() {
         stagger: 0.1 
     }, "-=0.2");
 
+    // Main Title Section animation
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: "#main-title",
+            start: "top center",
+            end: "bottom center",
+            toggleActions: "play none none reverse"
+        }
+    })
+    .from("#main-title .title-badge", { y: 30, opacity: 0, duration: 1 })
+    .from("#main-title .main-title", { y: 30, opacity: 0, duration: 0.8 }, "-=0.5")
+    .from("#main-title .main-subtitle", { y: 30, opacity: 0, duration: 0.8 }, "-=0.3")
+    .from("#main-title .title-decoration", { scale: 0, opacity: 0, duration: 0.5 }, "-=0.2");
+
     // Features Section animation
     gsap.timeline({
         scrollTrigger: {
@@ -324,6 +338,24 @@ function initScrollAnimations() {
         repeat: -1,
         yoyo: true
     });
+
+    // Feature cards hover effect
+    gsap.to(".feature-card", {
+        y: -2,
+        duration: 2,
+        ease: "power2.inOut",
+        repeat: -1,
+        yoyo: true,
+        stagger: 0.3
+    });
+
+    // Main title decoration animation
+    gsap.to(".decoration-icon", {
+        rotation: 360,
+        duration: 8,
+        ease: "power2.inOut",
+        repeat: -1
+    });
 }
 
 // Parallax Effects
@@ -363,16 +395,6 @@ function initParallaxEffects() {
         ease: "power2.inOut",
         repeat: -1,
         yoyo: true
-    });
-
-    // Feature cards hover effect
-    gsap.to(".feature-card", {
-        y: -2,
-        duration: 2,
-        ease: "power2.inOut",
-        repeat: -1,
-        yoyo: true,
-        stagger: 0.3
     });
 }
 
@@ -518,7 +540,7 @@ document.addEventListener('keydown', (e) => {
     // Arrow key navigation between scenes
     if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
         e.preventDefault();
-        const currentScene = document.querySelector('.story-scene:hover, .features-section:hover') || 
+        const currentScene = document.querySelector('.story-scene:hover, .features-section:hover, .main-title-section:hover') || 
                            Array.from(scenes).find(scene => {
                                const rect = scene.getBoundingClientRect();
                                return rect.top < window.innerHeight / 2 && rect.bottom > window.innerHeight / 2;
