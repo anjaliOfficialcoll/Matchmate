@@ -7,19 +7,20 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.344.0/lucide.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <div class="container">
             <div class="header-content">
-                <div class="logo">
+                <div class="logo animate__animated animate__fadeInLeft">
                     <div class="logo-icon">
                         <i data-lucide="home"></i>
                     </div>
                     <span class="logo-text">ApanaGhr</span>
                 </div>
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <button class="theme-toggle animate__animated animate__fadeInRight" id="themeToggle" aria-label="Toggle theme">
                     <i data-lucide="sun" class="sun-icon"></i>
                     <i data-lucide="moon" class="moon-icon"></i>
                 </button>
@@ -32,16 +33,16 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1 class="hero-title">
+                    <h1 class="hero-title animate__animated animate__fadeInUp animate__delay-1s">
                         Coming Soon: Smarter Room & 
                         <span class="highlight">Roommate Matching</span>
                     </h1>
-                    <p class="hero-subtitle">
+                    <p class="hero-subtitle animate__animated animate__fadeInUp animate__delay-2s">
                         Find PGs, Flats, and Compatible Roommates – Powered by AI.
                     </p>
                     
                     <!-- AI Illustration -->
-                    <div class="hero-visual">
+                    <div class="hero-visual animate__animated animate__zoomIn animate__delay-3s">
                         <div class="ai-illustration">
                             <div class="ai-brain">
                                 <div class="brain-node node-1"></div>
@@ -73,7 +74,7 @@
                 </div>
 
                 <!-- Countdown Timer -->
-                <div class="countdown-section">
+                <div class="countdown-section animate__animated animate__fadeInUp animate__delay-4s">
                     <h3 class="countdown-title">Launching in:</h3>
                     <div class="countdown-timer" id="countdownTimer">
                         <div class="countdown-item">
@@ -96,7 +97,7 @@
                 </div>
 
                 <!-- Email Form -->
-                <div class="email-form-container">
+                <div class="email-form-container animate__animated animate__fadeInUp animate__delay-5s">
                     <form class="email-form" id="emailForm">
                         <div class="form-group">
                             <input 
@@ -120,11 +121,59 @@
             </div>
         </div>
 
-        <!-- Background Elements -->
+        <!-- Enhanced Background Elements -->
         <div class="bg-elements">
+            <!-- Animated Background Circles -->
             <div class="bg-circle circle-1"></div>
             <div class="bg-circle circle-2"></div>
             <div class="bg-circle circle-3"></div>
+            
+            <!-- Housing-themed Background Illustrations -->
+            <div class="bg-illustration">
+                <!-- Building Silhouettes -->
+                <div class="building building-1">
+                    <div class="building-floor"></div>
+                    <div class="building-floor"></div>
+                    <div class="building-floor"></div>
+                    <div class="building-floor"></div>
+                </div>
+                <div class="building building-2">
+                    <div class="building-floor"></div>
+                    <div class="building-floor"></div>
+                    <div class="building-floor"></div>
+                </div>
+                <div class="building building-3">
+                    <div class="building-floor"></div>
+                    <div class="building-floor"></div>
+                    <div class="building-floor"></div>
+                    <div class="building-floor"></div>
+                    <div class="building-floor"></div>
+                </div>
+                
+                <!-- Floating House Icons -->
+                <div class="floating-house house-1">
+                    <i data-lucide="home"></i>
+                </div>
+                <div class="floating-house house-2">
+                    <i data-lucide="building-2"></i>
+                </div>
+                <div class="floating-house house-3">
+                    <i data-lucide="map-pin"></i>
+                </div>
+                
+                <!-- Connection Lines -->
+                <div class="connection-line line-1"></div>
+                <div class="connection-line line-2"></div>
+                <div class="connection-line line-3"></div>
+                
+                <!-- Floating Particles -->
+                <div class="particle particle-1"></div>
+                <div class="particle particle-2"></div>
+                <div class="particle particle-3"></div>
+                <div class="particle particle-4"></div>
+                <div class="particle particle-5"></div>
+                <div class="particle particle-6"></div>
+            </div>
         </div>
     </main>
 

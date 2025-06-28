@@ -179,6 +179,7 @@ body {
   justify-content: center;
   position: relative;
   padding: 6rem 0 4rem;
+  overflow: hidden;
 }
 
 .hero-content {
@@ -413,6 +414,7 @@ body {
   outline: none;
   border-color: var(--primary-accent);
   box-shadow: 0 0 0 3px rgba(0, 77, 64, 0.1);
+  transform: translateY(-1px);
 }
 
 [data-theme="dark"] .email-input:focus {
@@ -714,7 +716,7 @@ body {
   font-size: 0.875rem;
 }
 
-/* Background Elements */
+/* Enhanced Background Elements */
 .bg-elements {
   position: absolute;
   top: 0;
@@ -757,7 +759,168 @@ body {
   animation-delay: 4s;
 }
 
-/* Animations */
+/* Housing-themed Background Illustration */
+.bg-illustration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+/* Building Silhouettes */
+.building {
+  position: absolute;
+  bottom: 0;
+  background: var(--primary-accent);
+  border-radius: 4px 4px 0 0;
+  animation: buildingFloat 8s ease-in-out infinite;
+}
+
+.building-1 {
+  width: 60px;
+  height: 200px;
+  left: 5%;
+  animation-delay: 0s;
+}
+
+.building-2 {
+  width: 45px;
+  height: 150px;
+  left: 12%;
+  animation-delay: 2s;
+}
+
+.building-3 {
+  width: 70px;
+  height: 250px;
+  right: 8%;
+  animation-delay: 4s;
+}
+
+.building-floor {
+  width: 100%;
+  height: 20%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.building-floor::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 1px;
+  animation: windowBlink 3s ease-in-out infinite;
+}
+
+.building-floor::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 20%;
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 1px;
+  animation: windowBlink 3s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+/* Floating House Icons */
+.floating-house {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: var(--element-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-accent);
+  animation: houseFloat 6s ease-in-out infinite;
+  box-shadow: 0 4px 20px var(--shadow-light);
+}
+
+.floating-house i {
+  width: 24px;
+  height: 24px;
+}
+
+.house-1 {
+  top: 20%;
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.house-2 {
+  top: 40%;
+  right: 15%;
+  animation-delay: 2s;
+}
+
+.house-3 {
+  bottom: 30%;
+  left: 15%;
+  animation-delay: 4s;
+}
+
+/* Connection Lines */
+.connection-line {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(90deg, var(--highlight), transparent);
+  animation: connectionFlow 4s ease-in-out infinite;
+}
+
+.line-1 {
+  top: 25%;
+  left: 25%;
+  width: 150px;
+  transform: rotate(15deg);
+  animation-delay: 0s;
+}
+
+.line-2 {
+  top: 45%;
+  right: 20%;
+  width: 120px;
+  transform: rotate(-30deg);
+  animation-delay: 1.5s;
+}
+
+.line-3 {
+  bottom: 35%;
+  left: 20%;
+  width: 100px;
+  transform: rotate(45deg);
+  animation-delay: 3s;
+}
+
+/* Floating Particles */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--highlight);
+  border-radius: 50%;
+  animation: particleFloat 10s linear infinite;
+}
+
+.particle-1 { top: 10%; left: 10%; animation-delay: 0s; }
+.particle-2 { top: 30%; left: 80%; animation-delay: 2s; }
+.particle-3 { top: 60%; left: 15%; animation-delay: 4s; }
+.particle-4 { top: 80%; left: 70%; animation-delay: 6s; }
+.particle-5 { top: 50%; left: 50%; animation-delay: 8s; }
+.particle-6 { top: 20%; left: 60%; animation-delay: 10s; }
+
+/* Enhanced Animations */
 @keyframes pulse {
   0%, 100% {
     transform: scale(1);
@@ -810,6 +973,65 @@ body {
   }
   50% {
     transform: scale(1.1);
+  }
+}
+
+@keyframes buildingFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes houseFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(2deg);
+  }
+}
+
+@keyframes connectionFlow {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scaleX(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes windowBlink {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.8;
   }
 }
 
@@ -902,6 +1124,13 @@ body {
   
   .footer-links {
     gap: 0.5rem;
+  }
+  
+  /* Hide some background elements on mobile for performance */
+  .building,
+  .floating-house,
+  .connection-line {
+    display: none;
   }
 }
 
