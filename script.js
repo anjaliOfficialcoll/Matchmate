@@ -196,7 +196,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe elements for scroll animations
-document.querySelectorAll('.feature-card, .testimonial-card, .trust-item').forEach(card => {
+document.querySelectorAll('.feature-card, .testimonial-card, .trust-item, .mockup-item, .highlight-item').forEach(card => {
     card.style.opacity = '0';
     card.style.transform = 'translateY(20px)';
     card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -343,3 +343,36 @@ document.querySelectorAll('.testimonial-rating').forEach(rating => {
         });
     });
 });
+
+// Device mockup interactions
+document.querySelectorAll('.device-frame').forEach(frame => {
+    frame.addEventListener('mouseenter', () => {
+        // Add subtle glow effect
+        frame.style.boxShadow = '0 30px 80px var(--shadow-medium), 0 0 0 1px var(--primary-accent)';
+    });
+    
+    frame.addEventListener('mouseleave', () => {
+        // Remove glow effect
+        frame.style.boxShadow = '0 20px 60px var(--shadow-medium)';
+    });
+});
+
+// Mockup section scroll animations
+const mockupObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const mockupItems = entry.target.querySelectorAll('.mockup-item');
+            mockupItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, index * 300);
+            });
+        }
+    });
+}, { threshold: 0.2 });
+
+const mockupsSection = document.querySelector('.mockups-section');
+if (mockupsSection) {
+    mockupObserver.observe(mockupsSection);
+}
