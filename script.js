@@ -270,11 +270,11 @@ document.querySelectorAll('.social-link').forEach(link => {
         z-index: 1000;
     `;
     
-    // Determine platform based on icon
+    // Determine platform based on icon class
     let platform = '';
-    if (link.querySelector('[data-lucide="instagram"]')) {
+    if (link.querySelector('.instagram-icon')) {
         platform = 'Instagram';
-    } else if (link.querySelector('[data-lucide="linkedin"]')) {
+    } else if (link.querySelector('.linkedin-icon')) {
         platform = 'LinkedIn';
     } else if (link.querySelector('.twitter-icon')) {
         platform = 'X (Twitter)';

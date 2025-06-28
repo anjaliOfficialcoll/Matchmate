@@ -641,22 +641,21 @@ body {
   color: white;
 }
 
-.social-link i,
+.social-link .instagram-icon,
+.social-link .linkedin-icon,
 .social-link .twitter-icon {
   width: 24px;
   height: 24px;
   position: relative;
   z-index: 1;
   transition: all var(--transition-medium);
+  fill: currentColor;
 }
 
-.social-link:hover i,
+.social-link:hover .instagram-icon,
+.social-link:hover .linkedin-icon,
 .social-link:hover .twitter-icon {
   transform: scale(1.1);
-}
-
-.twitter-icon {
-  fill: currentColor;
 }
 
 /* Footer */
@@ -875,7 +874,8 @@ body {
     height: 50px;
   }
   
-  .social-link i,
+  .social-link .instagram-icon,
+  .social-link .linkedin-icon,
   .social-link .twitter-icon {
     width: 20px;
     height: 20px;
