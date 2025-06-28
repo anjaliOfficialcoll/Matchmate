@@ -132,7 +132,7 @@ document.head.appendChild(style);
 // Story Progress Tracking
 const progressBar = document.getElementById('progressBar');
 const progressDots = document.querySelectorAll('.progress-dot');
-const scenes = document.querySelectorAll('.story-scene');
+const scenes = document.querySelectorAll('.story-scene, .features-section');
 
 // Update progress based on scroll
 function updateProgress() {
@@ -259,6 +259,24 @@ function initScrollAnimations() {
         stagger: 0.1 
     }, "-=0.2");
 
+    // Features Section animation
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: "#features",
+            start: "top center",
+            end: "bottom center",
+            toggleActions: "play none none reverse"
+        }
+    })
+    .from("#features .features-header", { y: 30, opacity: 0, duration: 1 })
+    .from("#features .feature-card", { 
+        y: 50, 
+        opacity: 0, 
+        duration: 0.8, 
+        stagger: 0.2 
+    }, "-=0.5")
+    .from("#features .features-cta", { y: 30, opacity: 0, duration: 0.8 }, "-=0.3");
+
     // CTA Section animation
     gsap.timeline({
         scrollTrigger: {
@@ -346,6 +364,16 @@ function initParallaxEffects() {
         repeat: -1,
         yoyo: true
     });
+
+    // Feature cards hover effect
+    gsap.to(".feature-card", {
+        y: -2,
+        duration: 2,
+        ease: "power2.inOut",
+        repeat: -1,
+        yoyo: true,
+        stagger: 0.3
+    });
 }
 
 // Smooth scrolling for navigation
@@ -417,6 +445,27 @@ function initCharacterInteractions() {
             }
         });
     });
+
+    // Feature card interactions
+    document.querySelectorAll('.feature-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            gsap.to(card.querySelector('.feature-icon'), {
+                scale: 1.1,
+                rotation: 5,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            gsap.to(card.querySelector('.feature-icon'), {
+                scale: 1,
+                rotation: 0,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        });
+    });
 }
 
 // Initialize all animations and effects
@@ -469,7 +518,7 @@ document.addEventListener('keydown', (e) => {
     // Arrow key navigation between scenes
     if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
         e.preventDefault();
-        const currentScene = document.querySelector('.story-scene:hover') || 
+        const currentScene = document.querySelector('.story-scene:hover, .features-section:hover') || 
                            Array.from(scenes).find(scene => {
                                const rect = scene.getBoundingClientRect();
                                return rect.top < window.innerHeight / 2 && rect.bottom > window.innerHeight / 2;
