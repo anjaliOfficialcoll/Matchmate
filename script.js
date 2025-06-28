@@ -246,3 +246,20 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('User previously showed interest:', savedEmail);
     }
 });
+
+// Social media link interactions
+document.querySelectorAll('.social-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Add a subtle click animation
+        link.style.transform = 'translateY(-4px) scale(0.95)';
+        setTimeout(() => {
+            link.style.transform = 'translateY(-4px) scale(1)';
+        }, 150);
+        
+        // In a real application, these would link to actual social media pages
+        const platform = link.getAttribute('aria-label').split(' ').pop().toLowerCase();
+        console.log(`Would navigate to ${platform} page`);
+    });
+});

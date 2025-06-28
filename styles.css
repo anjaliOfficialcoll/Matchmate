@@ -360,6 +360,7 @@ body {
   color: var(--primary-accent);
   line-height: 1;
   margin-bottom: 0.5rem;
+  transition: transform var(--transition-fast);
 }
 
 .countdown-label {
@@ -368,6 +369,14 @@ body {
   color: var(--body-text);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+}
+
+.countdown-finished {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--success-color);
+  text-align: center;
+  padding: 2rem;
 }
 
 /* Email Form */
@@ -567,6 +576,119 @@ body {
   line-height: 1.6;
 }
 
+/* Social Media Section */
+.social-section {
+  padding: 3rem 0;
+  background: var(--bg-color);
+  border-top: 1px solid var(--border-color);
+}
+
+.social-content {
+  text-align: center;
+}
+
+.social-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--heading-color);
+  margin-bottom: 2rem;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: var(--element-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  color: var(--primary-accent);
+  text-decoration: none;
+  transition: all var(--transition-medium);
+  position: relative;
+  overflow: hidden;
+}
+
+.social-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-primary);
+  transform: scale(0);
+  transition: transform var(--transition-medium);
+  border-radius: 50%;
+}
+
+.social-link:hover::before {
+  transform: scale(1);
+}
+
+.social-link:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px var(--shadow-medium);
+  border-color: var(--primary-accent);
+  color: white;
+}
+
+.social-link i,
+.social-link .twitter-icon {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  z-index: 1;
+  transition: all var(--transition-medium);
+}
+
+.social-link:hover i,
+.social-link:hover .twitter-icon {
+  transform: scale(1.1);
+}
+
+.twitter-icon {
+  fill: currentColor;
+}
+
+/* Footer */
+.footer {
+  background: var(--element-bg);
+  border-top: 1px solid var(--border-color);
+  padding: 3rem 0 2rem;
+}
+
+.footer-content {
+  text-align: center;
+}
+
+.footer-logo {
+  margin-bottom: 1.5rem;
+}
+
+.footer-text {
+  font-size: 1rem;
+  color: var(--body-text);
+  margin-bottom: 1rem;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer-copyright {
+  font-size: 0.875rem;
+  color: var(--body-text);
+  opacity: 0.7;
+}
+
 /* Background Elements */
 .bg-elements {
   position: absolute;
@@ -709,6 +831,21 @@ body {
     font-size: 2rem;
   }
   
+  .social-links {
+    gap: 1rem;
+  }
+  
+  .social-link {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .social-link i,
+  .social-link .twitter-icon {
+    width: 20px;
+    height: 20px;
+  }
+  
   .ai-illustration {
     width: 150px;
     height: 150px;
@@ -745,5 +882,9 @@ body {
   
   .countdown-label {
     font-size: 0.75rem;
+  }
+  
+  .social-links {
+    gap: 0.75rem;
   }
 }
