@@ -1,3 +1,6 @@
+// GSAP Registration
+gsap.registerPlugin(ScrollTrigger);
+
 // Theme Toggle Functionality
 const themeToggle = document.getElementById('themeToggle');
 const body = document.body;
@@ -19,47 +22,6 @@ themeToggle.addEventListener('click', () => {
         themeToggle.style.transform = 'scale(1)';
     }, 150);
 });
-
-// Countdown Timer Functionality
-function updateCountdown() {
-    // Set target date (30 days from now for demo)
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 30);
-    targetDate.setHours(10, 55, 30, 0); // Set to 10:55:30
-    
-    const now = new Date().getTime();
-    const distance = targetDate.getTime() - now;
-    
-    // Calculate time units
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
-    // Update the display
-    document.getElementById('days').textContent = days.toString().padStart(2, '0');
-    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-    
-    // Add animation effect when numbers change
-    const countdownNumbers = document.querySelectorAll('.countdown-number');
-    countdownNumbers.forEach(number => {
-        number.style.transform = 'scale(1.05)';
-        setTimeout(() => {
-            number.style.transform = 'scale(1)';
-        }, 100);
-    });
-    
-    // If countdown is finished
-    if (distance < 0) {
-        document.getElementById('countdownTimer').innerHTML = '<div class="countdown-finished">🎉 We\'re Live!</div>';
-    }
-}
-
-// Update countdown every second
-setInterval(updateCountdown, 1000);
-updateCountdown(); // Initial call
 
 // Enhanced Email Form Functionality
 const emailForm = document.getElementById('emailForm');
@@ -86,7 +48,7 @@ emailForm.addEventListener('submit', async (e) => {
     
     // Show loading state
     const originalText = notifyBtn.innerHTML;
-    notifyBtn.innerHTML = '<i data-lucide="loader-2"></i><span>Submitting...</span>';
+    notifyBtn.innerHTML = '<i data-lucide="loader-2"></i><span>Joining...</span>';
     notifyBtn.disabled = true;
     
     // Add rotation animation to loader
@@ -167,77 +129,367 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            const headerHeight = document.querySelector('.header').offsetHeight;
-            const targetPosition = target.offsetTop - headerHeight - 20;
-            
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
+// Story Progress Tracking
+const progressBar = document.getElementById('progressBar');
+const progressDots = document.querySelectorAll('.progress-dot');
+const scenes = document.querySelectorAll('.story-scene');
+
+// Update progress based on scroll
+function updateProgress() {
+    const scrollTop = window.pageYOffset;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+    
+    if (progressBar) {
+        progressBar.style.setProperty('--progress', `${scrollPercent}%`);
+        progressBar.style.background = `linear-gradient(to top, var(--primary-accent) ${scrollPercent}%, var(--border-color) ${scrollPercent}%)`;
+    }
+    
+    // Update active scene
+    scenes.forEach((scene, index) => {
+        const rect = scene.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight / 2 && rect.bottom > window.innerHeight / 2;
+        
+        if (isVisible) {
+            progressDots.forEach(dot => dot.classList.remove('active'));
+            if (progressDots[index]) {
+                progressDots[index].classList.add('active');
+            }
+        }
+    });
+}
+
+// Progress dot click handlers
+progressDots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+        const targetScene = scenes[index];
+        if (targetScene) {
+            targetScene.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'center'
             });
         }
     });
 });
 
-// Enhanced scroll animations with intersection observer
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
+// GSAP Scroll Animations
+function initScrollAnimations() {
+    // Scene 1 - Character animations
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: "#scene1",
+            start: "top center",
+            end: "bottom center",
+            toggleActions: "play none none reverse"
+        }
+    })
+    .from("#scene1 .character-angry", { x: -100, opacity: 0, duration: 1 })
+    .from("#scene1 .character-party", { x: 100, opacity: 0, duration: 1 }, "-=0.5")
+    .from("#scene1 .speech-bubble", { scale: 0, opacity: 0, duration: 0.5 }, "-=0.3")
+    .from("#scene1 .music-notes .note", { 
+        y: -20, 
+        opacity: 0, 
+        duration: 0.3, 
+        stagger: 0.1 
+    }, "-=0.2");
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+    // Scene 2 - Unsafe environment
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: "#scene2",
+            start: "top center",
+            end: "bottom center",
+            toggleActions: "play none none reverse"
+        }
+    })
+    .from("#scene2 .character-scared", { y: 50, opacity: 0, duration: 1 })
+    .from("#scene2 .unsafe-environment", { scale: 0.8, opacity: 0, duration: 0.8 }, "-=0.5")
+    .from("#scene2 .failed-attempts > *", { 
+        x: -30, 
+        opacity: 0, 
+        duration: 0.5, 
+        stagger: 0.2 
+    }, "-=0.3");
+
+    // Scene 3 - Wishlist animation
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: "#scene3",
+            start: "top center",
+            end: "bottom center",
+            toggleActions: "play none none reverse"
+        }
+    })
+    .from("#scene3 .character-hopeful", { scale: 0.8, opacity: 0, duration: 1 })
+    .from("#scene3 .wishlist", { y: 50, opacity: 0, duration: 0.8 }, "-=0.5")
+    .from("#scene3 .wishlist-item", { 
+        x: -20, 
+        opacity: 0, 
+        duration: 0.3, 
+        stagger: 0.1 
+    }, "-=0.3")
+    .from("#scene3 .star", { 
+        scale: 0, 
+        opacity: 0, 
+        duration: 0.5, 
+        stagger: 0.1 
+    }, "-=0.5");
+
+    // Scene 4 - Success animation
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: "#scene4",
+            start: "top center",
+            end: "bottom center",
+            toggleActions: "play none none reverse"
+        }
+    })
+    .from("#scene4 .character-happy", { scale: 0.8, opacity: 0, duration: 1 })
+    .from("#scene4 .app-mockup", { y: 50, opacity: 0, duration: 0.8 }, "-=0.5")
+    .from("#scene4 .celebration-effects .confetti", { 
+        y: -30, 
+        opacity: 0, 
+        duration: 0.5, 
+        stagger: 0.1 
+    }, "-=0.3")
+    .from("#scene4 .success-indicators .indicator", { 
+        scale: 0, 
+        opacity: 0, 
+        duration: 0.3, 
+        stagger: 0.1 
+    }, "-=0.2");
+
+    // CTA Section animation
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: "#cta",
+            start: "top center",
+            end: "bottom center",
+            toggleActions: "play none none reverse"
+        }
+    })
+    .from("#cta .cta-text", { y: 30, opacity: 0, duration: 1 })
+    .from("#cta .email-form-container", { y: 30, opacity: 0, duration: 0.8 }, "-=0.5")
+    .from("#cta .trust-stats .stat-item", { 
+        y: 20, 
+        opacity: 0, 
+        duration: 0.5, 
+        stagger: 0.1 
+    }, "-=0.3");
+
+    // Continuous animations
+    gsap.to(".music-notes .note", {
+        y: -10,
+        duration: 2,
+        ease: "power2.inOut",
+        stagger: 0.3,
+        repeat: -1,
+        yoyo: true
+    });
+
+    gsap.to(".star", {
+        scale: 1.2,
+        opacity: 1,
+        duration: 2,
+        ease: "power2.inOut",
+        stagger: 0.5,
+        repeat: -1,
+        yoyo: true
+    });
+
+    gsap.to(".confetti", {
+        rotation: 360,
+        y: 20,
+        duration: 3,
+        ease: "power2.inOut",
+        stagger: 0.5,
+        repeat: -1,
+        yoyo: true
+    });
+}
+
+// Parallax Effects
+function initParallaxEffects() {
+    // Background parallax for each scene
+    scenes.forEach((scene, index) => {
+        const background = scene.querySelector('.scene-background');
+        if (background) {
+            gsap.to(background, {
+                yPercent: -50,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: scene,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
         }
     });
-}, observerOptions);
 
-// Observe elements for scroll animations
-document.querySelectorAll('.feature-card').forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(20px)';
-    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(card);
-});
+    // Character floating animations
+    gsap.to(".character", {
+        y: -5,
+        duration: 3,
+        ease: "power2.inOut",
+        repeat: -1,
+        yoyo: true,
+        stagger: 0.5
+    });
 
-// Enhanced parallax effect
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const rate = scrolled * -0.5;
-    
-    // Parallax for background circles
-    document.querySelectorAll('.bg-circle').forEach((circle, index) => {
-        const speed = (index + 1) * 0.1;
-        circle.style.transform = `translateY(${scrolled * speed}px)`;
+    // Phone mockup floating
+    gsap.to(".phone-frame", {
+        y: -8,
+        rotation: 2,
+        duration: 4,
+        ease: "power2.inOut",
+        repeat: -1,
+        yoyo: true
     });
-    
-    // Parallax for floating cards
-    document.querySelectorAll('.floating-card').forEach((card, index) => {
-        const speed = (index + 1) * 0.05;
-        card.style.transform = `translateY(${scrolled * speed}px)`;
-    });
-    
-    // Header background opacity on scroll
-    const header = document.querySelector('.header');
-    const opacity = Math.min(scrolled / 100, 0.95);
-    if (scrolled > 50) {
-        header.style.background = `rgba(${document.body.getAttribute('data-theme') === 'dark' ? '15, 15, 15' : '250, 250, 250'}, ${opacity})`;
-    } else {
-        header.style.background = `rgba(${document.body.getAttribute('data-theme') === 'dark' ? '15, 15, 15' : '250, 250, 250'}, 0.95)`;
+}
+
+// Smooth scrolling for navigation
+function initSmoothScrolling() {
+    // Scroll indicator click
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    if (scrollIndicator) {
+        scrollIndicator.addEventListener('click', () => {
+            const nextScene = document.getElementById('scene2');
+            if (nextScene) {
+                nextScene.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            }
+        });
     }
-});
+}
 
-// Add keyboard navigation support
+// Header background opacity on scroll
+function initHeaderEffects() {
+    const header = document.querySelector('.header');
+    
+    gsap.to(header, {
+        backgroundColor: "rgba(250, 250, 250, 0.98)",
+        backdropFilter: "blur(20px)",
+        scrollTrigger: {
+            trigger: "body",
+            start: "top -50px",
+            end: "top -51px",
+            toggleActions: "play none none reverse"
+        }
+    });
+}
+
+// Character interaction effects
+function initCharacterInteractions() {
+    // Add hover effects to characters
+    document.querySelectorAll('.character').forEach(character => {
+        character.addEventListener('mouseenter', () => {
+            gsap.to(character, {
+                scale: 1.05,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        });
+        
+        character.addEventListener('mouseleave', () => {
+            gsap.to(character, {
+                scale: 1,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        });
+    });
+
+    // Speech bubble animations
+    document.querySelectorAll('.speech-bubble, .thought-bubble').forEach(bubble => {
+        gsap.set(bubble, { scale: 0 });
+        
+        gsap.to(bubble, {
+            scale: 1,
+            duration: 0.5,
+            ease: "back.out(1.7)",
+            scrollTrigger: {
+                trigger: bubble.closest('.story-scene'),
+                start: "top center",
+                toggleActions: "play none none reverse"
+            }
+        });
+    });
+}
+
+// Initialize all animations and effects
+function initializeApp() {
+    // Initialize GSAP animations
+    initScrollAnimations();
+    initParallaxEffects();
+    initSmoothScrolling();
+    initHeaderEffects();
+    initCharacterInteractions();
+    
+    // Add scroll listener for progress tracking
+    window.addEventListener('scroll', updateProgress);
+    
+    // Initial progress update
+    updateProgress();
+    
+    console.log('ApanaGhr Comic Story loaded successfully!');
+    
+    // Check if user has already submitted email
+    const savedEmail = localStorage.getItem('apanaghr_email');
+    if (savedEmail) {
+        console.log('User previously joined waitlist:', savedEmail);
+    }
+}
+
+// Performance optimization: Debounce scroll events
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Apply debouncing to scroll handler
+const debouncedUpdateProgress = debounce(updateProgress, 10);
+window.addEventListener('scroll', debouncedUpdateProgress);
+
+// Keyboard navigation support
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Tab') {
         document.body.classList.add('keyboard-navigation');
+    }
+    
+    // Arrow key navigation between scenes
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        const currentScene = document.querySelector('.story-scene:hover') || 
+                           Array.from(scenes).find(scene => {
+                               const rect = scene.getBoundingClientRect();
+                               return rect.top < window.innerHeight / 2 && rect.bottom > window.innerHeight / 2;
+                           });
+        
+        if (currentScene) {
+            const currentIndex = Array.from(scenes).indexOf(currentScene);
+            let targetIndex;
+            
+            if (e.key === 'ArrowDown') {
+                targetIndex = Math.min(currentIndex + 1, scenes.length - 1);
+            } else {
+                targetIndex = Math.max(currentIndex - 1, 0);
+            }
+            
+            scenes[targetIndex].scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'center'
+            });
+        }
     }
 });
 
@@ -255,139 +507,10 @@ keyboardStyle.textContent = `
 `;
 document.head.appendChild(keyboardStyle);
 
-// Social media link interactions with enhanced tooltips
-document.querySelectorAll('.social-link').forEach(link => {
-    // Create tooltip element
-    const tooltip = document.createElement('div');
-    tooltip.className = 'social-tooltip';
-    tooltip.style.cssText = `
-        position: absolute;
-        bottom: 120%;
-        left: 50%;
-        transform: translateX(-50%);
-        background: var(--heading-color);
-        color: var(--bg-color);
-        padding: 0.5rem 0.75rem;
-        border-radius: 0.5rem;
-        font-size: 0.75rem;
-        font-weight: 500;
-        white-space: nowrap;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.3s ease, transform 0.3s ease;
-        z-index: 1000;
-    `;
-    
-    // Determine platform based on icon class
-    let platform = '';
-    if (link.querySelector('.instagram-icon')) {
-        platform = 'Follow on Instagram';
-    } else if (link.querySelector('.linkedin-icon')) {
-        platform = 'Connect on LinkedIn';
-    } else if (link.querySelector('.twitter-icon')) {
-        platform = 'Follow on X';
-    }
-    
-    tooltip.textContent = platform;
-    link.style.position = 'relative';
-    link.appendChild(tooltip);
-    
-    // Show tooltip on hover
-    link.addEventListener('mouseenter', () => {
-        tooltip.style.opacity = '1';
-        tooltip.style.transform = 'translateX(-50%) translateY(-4px)';
-    });
-    
-    // Hide tooltip on leave
-    link.addEventListener('mouseleave', () => {
-        tooltip.style.opacity = '0';
-        tooltip.style.transform = 'translateX(-50%) translateY(0)';
-    });
-    
-    // Click interaction
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        // Add a subtle click animation
-        link.style.transform = 'translateY(-4px) scale(0.95)';
-        setTimeout(() => {
-            link.style.transform = 'translateY(-4px) scale(1)';
-        }, 150);
-        
-        // In a real application, these would link to actual social media pages
-        console.log(`Would navigate to ${platform}`);
-    });
-});
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', initializeApp);
 
-// Enhanced mockup interactions
-document.addEventListener('DOMContentLoaded', () => {
-    // Add subtle animations to mockup elements
-    const phoneScreen = document.querySelector('.phone-screen');
-    const desktopScreen = document.querySelector('.desktop-screen');
-    
-    if (phoneScreen) {
-        phoneScreen.addEventListener('mouseenter', () => {
-            phoneScreen.style.transform = 'scale(1.02)';
-        });
-        
-        phoneScreen.addEventListener('mouseleave', () => {
-            phoneScreen.style.transform = 'scale(1)';
-        });
-    }
-    
-    if (desktopScreen) {
-        desktopScreen.addEventListener('mouseenter', () => {
-            desktopScreen.style.transform = 'scale(1.02)';
-        });
-        
-        desktopScreen.addEventListener('mouseleave', () => {
-            desktopScreen.style.transform = 'scale(1)';
-        });
-    }
-    
-    // Initialize any dynamic content
-    console.log('ApanaGhr Enhanced Landing Page loaded');
-    
-    // Check if user has already submitted email
-    const savedEmail = localStorage.getItem('apanaghr_email');
-    if (savedEmail) {
-        console.log('User previously showed interest:', savedEmail);
-    }
-    
-    // Add loading animation to feature cards
-    const featureCards = document.querySelectorAll('.feature-card');
-    featureCards.forEach((card, index) => {
-        setTimeout(() => {
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-        }, index * 200);
-    });
-});
-
-// Performance optimization: Debounce scroll events
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Apply debouncing to scroll handler
-const debouncedScrollHandler = debounce(() => {
-    const scrolled = window.pageYOffset;
-    
-    // Only apply parallax on larger screens for performance
-    if (window.innerWidth > 768) {
-        document.querySelectorAll('.bg-circle').forEach((circle, index) => {
-            const speed = (index + 1) * 0.1;
-            circle.style.transform = `translateY(${scrolled * speed}px)`;
-        });
-    }
-}, 10);
-
-window.addEventListener('scroll', debouncedScrollHandler);
+// Refresh ScrollTrigger on window resize
+window.addEventListener('resize', debounce(() => {
+    ScrollTrigger.refresh();
+}, 250));
