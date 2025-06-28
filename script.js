@@ -196,7 +196,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe elements for scroll animations
-document.querySelectorAll('.feature-card, .feature-card-item, .stat-card, .step-item').forEach(card => {
+document.querySelectorAll('.feature-card, .feature-card-item, .stat-card').forEach(card => {
     card.style.opacity = '0';
     card.style.transform = 'translateY(20px)';
     card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -328,7 +328,7 @@ const progressObserver = new IntersectionObserver((entries) => {
             if (largeProgressBar) {
                 largeProgressBar.style.width = '0%';
                 setTimeout(() => {
-                    largeProgressBar.style.width = '72%';
+                    largeProgressBar.style.width = '68%';
                 }, 100);
             }
         }
@@ -355,20 +355,4 @@ const featureCardsObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.feature-card-item').forEach(card => {
     featureCardsObserver.observe(card);
-});
-
-// Add staggered animation for step items
-const stepItemsObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-            setTimeout(() => {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }, index * 200);
-        }
-    });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.step-item').forEach(step => {
-    stepItemsObserver.observe(step);
 });
