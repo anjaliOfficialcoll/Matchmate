@@ -10,6 +10,56 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 <body>
+    <!-- Sticky Floating CTA -->
+    <div class="floating-cta" id="floatingCTA">
+        <div class="floating-cta-content">
+            <div class="floating-cta-text">
+                <div class="floating-cta-icon">
+                    <i data-lucide="bell"></i>
+                </div>
+                <div class="floating-cta-info">
+                    <span class="floating-cta-title">Don't miss the launch!</span>
+                    <span class="floating-cta-subtitle">Get notified when ApanaGhr goes live</span>
+                </div>
+            </div>
+            <button class="floating-notify-btn" id="floatingNotifyBtn">
+                <span class="btn-text">Notify Me</span>
+                <i data-lucide="arrow-right" class="btn-icon"></i>
+            </button>
+            <button class="floating-close-btn" id="floatingCloseBtn" aria-label="Close notification">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Sticky Top Navbar Enhancement -->
+    <div class="sticky-navbar" id="stickyNavbar">
+        <div class="container">
+            <div class="sticky-navbar-content">
+                <div class="sticky-logo">
+                    <div class="logo-icon">
+                        <i data-lucide="home"></i>
+                    </div>
+                    <span class="logo-text">ApanaGhr</span>
+                </div>
+                <div class="sticky-cta-group">
+                    <div class="countdown-mini" id="countdownMini">
+                        <span class="countdown-mini-text">Launching in:</span>
+                        <div class="countdown-mini-timer">
+                            <span id="miniDays">30</span>d
+                            <span id="miniHours">10</span>h
+                            <span id="miniMinutes">55</span>m
+                        </div>
+                    </div>
+                    <button class="sticky-notify-btn" id="stickyNotifyBtn">
+                        <i data-lucide="bell"></i>
+                        <span>Get Notified</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Header -->
     <header class="header">
         <div class="container">
@@ -695,6 +745,55 @@
             </div>
         </div>
     </footer>
+
+    <!-- Email Modal for Floating CTA -->
+    <div class="email-modal" id="emailModal">
+        <div class="email-modal-overlay" id="emailModalOverlay"></div>
+        <div class="email-modal-content">
+            <div class="email-modal-header">
+                <h3>Get Notified When We Launch!</h3>
+                <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="email-modal-body">
+                <p>Be the first to know when ApanaGhr goes live. Join thousands of others waiting for the future of roommate matching!</p>
+                <form class="modal-email-form" id="modalEmailForm">
+                    <div class="modal-form-group">
+                        <input 
+                            type="email" 
+                            id="modalEmail" 
+                            placeholder="Enter your email address" 
+                            required
+                            class="modal-email-input"
+                        >
+                        <button type="submit" class="modal-notify-btn">
+                            <span class="btn-text">Notify Me</span>
+                            <i data-lucide="arrow-right" class="btn-icon"></i>
+                        </button>
+                    </div>
+                    <div class="modal-success-message" id="modalSuccessMessage">
+                        <i data-lucide="check-circle"></i>
+                        <span>Perfect! We'll notify you as soon as we launch.</span>
+                    </div>
+                </form>
+                <div class="modal-benefits">
+                    <div class="benefit-item">
+                        <i data-lucide="zap"></i>
+                        <span>Early access to premium features</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i data-lucide="gift"></i>
+                        <span>Exclusive launch discounts</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i data-lucide="users"></i>
+                        <span>Priority roommate matching</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>

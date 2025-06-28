@@ -36,11 +36,16 @@ function updateCountdown() {
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
     
-    // Update the display
+    // Update the main display
     document.getElementById('days').textContent = days.toString().padStart(2, '0');
     document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
     document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
     document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    
+    // Update the mini countdown in sticky navbar
+    document.getElementById('miniDays').textContent = days;
+    document.getElementById('miniHours').textContent = hours;
+    document.getElementById('miniMinutes').textContent = minutes;
     
     // Add animation effect when numbers change
     const countdownNumbers = document.querySelectorAll('.countdown-number');
@@ -54,6 +59,7 @@ function updateCountdown() {
     // If countdown is finished
     if (distance < 0) {
         document.getElementById('countdownTimer').innerHTML = '<div class="countdown-finished">🎉 We\'re Live!</div>';
+        document.getElementById('countdownMini').innerHTML = '<span class="countdown-finished">🎉 Live!</span>';
     }
 }
 
@@ -61,7 +67,205 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown(); // Initial call
 
-// Email Form Functionality
+// Sticky Navbar Functionality
+const stickyNavbar = document.getElementById('stickyNavbar');
+const header = document.querySelector('.header');
+let lastScrollY = window.scrollY;
+
+function handleStickyNavbar() {
+    const currentScrollY = window.scrollY;
+    const headerHeight = header.offsetHeight;
+    
+    // Show sticky navbar when scrolling down past header
+    if (currentScrollY > headerHeight && currentScrollY > lastScrollY) {
+        stickyNavbar.classList.add('show');
+    } 
+    // Hide when scrolling up or at top
+    else if (currentScrollY < lastScrollY || currentScrollY <= headerHeight) {
+        stickyNavbar.classList.remove('show');
+    }
+    
+    lastScrollY = currentScrollY;
+}
+
+window.addEventListener('scroll', handleStickyNavbar);
+
+// Floating CTA Functionality
+const floatingCTA = document.getElementById('floatingCTA');
+const floatingCloseBtn = document.getElementById('floatingCloseBtn');
+const floatingNotifyBtn = document.getElementById('floatingNotifyBtn');
+let ctaDismissed = localStorage.getItem('apanaghr_cta_dismissed') === 'true';
+
+function showFloatingCTA() {
+    if (!ctaDismissed && window.scrollY > 500) {
+        floatingCTA.classList.add('show');
+    }
+}
+
+function hideFloatingCTA() {
+    floatingCTA.classList.remove('show');
+}
+
+// Show floating CTA after scrolling
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 500 && !ctaDismissed) {
+        setTimeout(showFloatingCTA, 1000);
+    }
+});
+
+// Close floating CTA
+floatingCloseBtn.addEventListener('click', () => {
+    hideFloatingCTA();
+    ctaDismissed = true;
+    localStorage.setItem('apanaghr_cta_dismissed', 'true');
+});
+
+// Floating CTA click handler
+floatingNotifyBtn.addEventListener('click', () => {
+    openEmailModal();
+});
+
+// Sticky navbar notify button
+document.getElementById('stickyNotifyBtn').addEventListener('click', () => {
+    openEmailModal();
+});
+
+// Email Modal Functionality
+const emailModal = document.getElementById('emailModal');
+const emailModalOverlay = document.getElementById('emailModalOverlay');
+const modalCloseBtn = document.getElementById('modalCloseBtn');
+const modalEmailForm = document.getElementById('modalEmailForm');
+const modalEmailInput = document.getElementById('modalEmail');
+const modalSuccessMessage = document.getElementById('modalSuccessMessage');
+const modalNotifyBtn = modalEmailForm.querySelector('.modal-notify-btn');
+
+function openEmailModal() {
+    emailModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    modalEmailInput.focus();
+}
+
+function closeEmailModal() {
+    emailModal.classList.remove('show');
+    document.body.style.overflow = '';
+    modalEmailInput.value = '';
+    modalSuccessMessage.classList.remove('show');
+    modalNotifyBtn.disabled = false;
+    modalNotifyBtn.innerHTML = '<span class="btn-text">Notify Me</span><i data-lucide="arrow-right" class="btn-icon"></i>';
+    
+    // Re-initialize lucide icons
+    if (window.lucide) {
+        lucide.createIcons();
+    }
+}
+
+// Modal close handlers
+modalCloseBtn.addEventListener('click', closeEmailModal);
+emailModalOverlay.addEventListener('click', closeEmailModal);
+
+// Close modal on Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && emailModal.classList.contains('show')) {
+        closeEmailModal();
+    }
+});
+
+// Modal email form submission
+modalEmailForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const email = modalEmailInput.value.trim();
+    
+    if (!email) {
+        return;
+    }
+    
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        showModalError('Please enter a valid email address');
+        return;
+    }
+    
+    // Show loading state
+    const originalText = modalNotifyBtn.innerHTML;
+    modalNotifyBtn.innerHTML = '<i data-lucide="loader-2"></i><span>Submitting...</span>';
+    modalNotifyBtn.disabled = true;
+    
+    // Add rotation animation to loader
+    const loader = modalNotifyBtn.querySelector('[data-lucide="loader-2"]');
+    if (loader) {
+        loader.style.animation = 'spin 1s linear infinite';
+    }
+    
+    // Re-initialize lucide icons for loader
+    if (window.lucide) {
+        lucide.createIcons();
+    }
+    
+    try {
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        // Show success message
+        modalEmailInput.style.display = 'none';
+        modalNotifyBtn.style.display = 'none';
+        modalSuccessMessage.classList.add('show');
+        
+        // Store email in localStorage
+        localStorage.setItem('apanaghr_email', email);
+        
+        // Hide floating CTA since user has signed up
+        hideFloatingCTA();
+        ctaDismissed = true;
+        localStorage.setItem('apanaghr_cta_dismissed', 'true');
+        
+        // Close modal after 3 seconds
+        setTimeout(() => {
+            closeEmailModal();
+        }, 3000);
+        
+    } catch (error) {
+        showModalError('Something went wrong. Please try again.');
+        modalNotifyBtn.innerHTML = originalText;
+        modalNotifyBtn.disabled = false;
+    }
+});
+
+function showModalError(message) {
+    // Create temporary error message
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'modal-error-message';
+    errorDiv.innerHTML = `<i data-lucide="alert-circle"></i><span>${message}</span>`;
+    errorDiv.style.cssText = `
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 1rem;
+        background: rgba(244, 67, 54, 0.1);
+        border: 1px solid #f44336;
+        border-radius: 0.75rem;
+        color: #f44336;
+        font-weight: 500;
+        margin-top: 1rem;
+        animation: slideUp 0.5s ease;
+    `;
+    
+    modalEmailForm.appendChild(errorDiv);
+    
+    // Re-initialize lucide icons for the new error icon
+    if (window.lucide) {
+        lucide.createIcons();
+    }
+    
+    // Remove error message after 3 seconds
+    setTimeout(() => {
+        errorDiv.remove();
+    }, 3000);
+}
+
+// Email Form Functionality (Main Hero Section)
 const emailForm = document.getElementById('emailForm');
 const emailInput = document.getElementById('email');
 const successMessage = document.getElementById('successMessage');
@@ -105,6 +309,11 @@ emailForm.addEventListener('submit', async (e) => {
         
         // Store email in localStorage for demo purposes
         localStorage.setItem('apanaghr_email', email);
+        
+        // Hide floating CTA since user has signed up
+        hideFloatingCTA();
+        ctaDismissed = true;
+        localStorage.setItem('apanaghr_cta_dismissed', 'true');
         
         // Reset form after 5 seconds
         setTimeout(() => {
@@ -244,6 +453,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedEmail = localStorage.getItem('apanaghr_email');
     if (savedEmail) {
         console.log('User previously showed interest:', savedEmail);
+        // Hide floating CTA if user already signed up
+        ctaDismissed = true;
+        localStorage.setItem('apanaghr_cta_dismissed', 'true');
     }
 });
 
