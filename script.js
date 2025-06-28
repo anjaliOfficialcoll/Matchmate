@@ -247,8 +247,54 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Social media link interactions
+// Social media link interactions with proper platform detection
 document.querySelectorAll('.social-link').forEach(link => {
+    // Create tooltip element
+    const tooltip = document.createElement('div');
+    tooltip.className = 'social-tooltip';
+    tooltip.style.cssText = `
+        position: absolute;
+        bottom: 120%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--heading-color);
+        color: var(--bg-color);
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.5rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        z-index: 1000;
+    `;
+    
+    // Determine platform based on icon
+    let platform = '';
+    if (link.querySelector('[data-lucide="instagram"]')) {
+        platform = 'Instagram';
+    } else if (link.querySelector('[data-lucide="linkedin"]')) {
+        platform = 'LinkedIn';
+    } else if (link.querySelector('.twitter-icon')) {
+        platform = 'X (Twitter)';
+    }
+    
+    tooltip.textContent = platform;
+    link.style.position = 'relative';
+    link.appendChild(tooltip);
+    
+    // Show tooltip on hover
+    link.addEventListener('mouseenter', () => {
+        tooltip.style.opacity = '1';
+    });
+    
+    // Hide tooltip on leave
+    link.addEventListener('mouseleave', () => {
+        tooltip.style.opacity = '0';
+    });
+    
+    // Click interaction
     link.addEventListener('click', (e) => {
         e.preventDefault();
         
@@ -259,7 +305,6 @@ document.querySelectorAll('.social-link').forEach(link => {
         }, 150);
         
         // In a real application, these would link to actual social media pages
-        const platform = link.getAttribute('aria-label').split(' ').pop().toLowerCase();
         console.log(`Would navigate to ${platform} page`);
     });
 });
